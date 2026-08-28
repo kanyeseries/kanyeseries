@@ -42,15 +42,16 @@
     "orders": {
       "$uid": {
         ".read": "auth != null && (auth.uid == $uid || root.child('users').child(auth.uid).child('role').val() == 'admin')",
-        ".write": "auth != null && (auth.uid == $uid || root.child('users').child(auth.uid).child('role').val() == 'admin')",
         "$orderId": {
-          ".validate": "newData.child('userId').val() == $uid || root.child('users').child(auth.uid).child('role').val() == 'admin'"
+          ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() == 'admin' || (auth.uid == $uid && !data.exists() && newData.child('userId').val() == $uid))",
+          ".validate": "root.child('users').child(auth.uid).child('role').val() == 'admin' || (newData.hasChildren(['orderId', 'userId', 'items', 'total', 'status', 'createdAt']) && newData.child('userId').val() == $uid)"
         }
       }
     },
 
     "specialOrders": {
-      ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() == 'admin'",
+      ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() == 'admin' || (query.orderByChild == 'userId' && query.equalTo == auth.uid))",
+      ".indexOn": ["userId"],
       "$orderId": {
         ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() == 'admin' || (!data.exists() && newData.child('userId').val() == auth.uid))",
         ".validate": "newData.child('userId').val() == auth.uid || root.child('users').child(auth.uid).child('role').val() == 'admin'"

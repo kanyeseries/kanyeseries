@@ -536,6 +536,9 @@
             getDatabase,
             ref,
             get,
+            query,
+            orderByChild,
+            equalTo,
             onValue
         } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
 
@@ -902,13 +905,18 @@
                 }
 
                 try {
-                    const specialOrdersSnapshot = await get(ref(db, "specialOrders"));
+                    const specialOrdersSnapshot = await get(
+                        query(
+                            ref(db, "specialOrders"),
+                            orderByChild("userId"),
+                            equalTo(user.uid)
+                        )
+                    );
                     if (specialOrdersSnapshot.exists()) {
                         const specialOrders = specialOrdersSnapshot.val() || {};
 
                         allOrders.push(
                             ...Object.entries(specialOrders)
-                                .filter(([, value]) => value?.userId === user.uid)
                                 .map(([key, value]) => ({
                                     ...(value || {}),
                                     id: value?.orderId || key,
