@@ -267,14 +267,21 @@
             const orderRef = push(ref(db, `orders/${currentUser.uid}`));
             const order = { orderId: orderRef.key, userId: currentUser.uid, customerName: name, customerPhone: phone, items: entries.map(([id, item]) => ({ productId: String(item.productId || id), name: item.name || "Unnamed product", price: Number(item.price) || 0, image: getImage(item), quantity: Math.max(1, Math.floor(Number(item.quantity) || 1)), stockReserved: Math.max(0, Math.floor(Number(item.stockReserved) || 0)) })), subtotal, total: subtotal, status: "pending", paymentStatus: "pending", stockRestored: false, paymentPhone, paymentReference: $("paymentReference").value.trim(), shippingAddress: { address, area, instructions: $("instructions").value.trim() }, createdAt: Date.now() };
             await set(orderRef, order);
-            await remove(ref(db, `carts/${currentUser.uid}`));
+            try {
+                await remove(ref(db, `carts/${currentUser.uid}`));
+            } catch (cartCleanupError) {
+                console.warn("Order created, but cart cleanup failed:", cartCleanupError);
+            }
             $("successOrderId").textContent = orderRef.key;
             $("successTotal").textContent = money(subtotal);
             $("successDelivery").textContent = [address, area].filter(Boolean).join(", ");
             showOnly($("successState"));
         } catch (error) {
             console.error("Order creation error:", error);
-            await Swal.fire({ icon: "error", title: "Could not place order", text: "Something went wrong while placing your order. Please check your connection and try again.", confirmButtonColor: "#1d4ed8" });
+            const message = error?.code === "PERMISSION_DENIED"
+                ? "Firebase security rules do not allow this account to create orders. Update the Realtime Database rules for orders/{uid}."
+                : "Something went wrong while placing your order. Please check your connection and try again.";
+            await Swal.fire({ icon: "error", title: "Could not place order", text: message, confirmButtonColor: "#1d4ed8" });
             placeOrderBtn.disabled = false;
             $("placeOrderText").textContent = "Place Order";
             $("placeOrderIcon").className = "bi bi-arrow-right";

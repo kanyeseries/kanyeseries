@@ -23,6 +23,11 @@ IMPORTANT:
 Frontend checks are not sufficient. Configure Firebase Realtime Database Security Rules
 to enforce admin access server-side.
 
+The matching rules are in database.rules.json. Publish them in Firebase Console under
+Realtime Database > Rules for the kanyeseries-d511b project. In particular, the rules
+must allow an authenticated user to write orders/{UID}/{ORDER_ID} when the order's
+userId matches that UID.
+
 CLOUDINARY
 ----------
 Cloud name: garfgnqe

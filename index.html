@@ -2234,23 +2234,6 @@
                         existing?.quantity || 0
                     );
 
-                const stock =
-                    Number(product.stock || 0);
-
-
-                const stockRef = ref(db, `products/${productId}/stock`);
-                const stockResult = await runTransaction(stockRef, currentStock => {
-                    if (currentStock === null || !Number.isFinite(Number(currentStock))) return currentStock;
-                    if (Number(currentStock) <= 0) return;
-                    return Number(currentStock) - 1;
-                });
-
-                if (!stockResult.committed) {
-                    showMessage("Stock limit reached", "This product is currently out of stock.", "warning");
-                    return;
-                }
-
-
                 const cartItem = {
 
                     productId,
@@ -2278,18 +2261,13 @@
                 };
 
 
-                try {
-                    await set(
-                        ref(
-                            db,
-                            `carts/${currentUser.uid}/${productId}`
-                        ),
-                        cartItem
-                    );
-                } catch (error) {
-                    await runTransaction(stockRef, currentStock => Number.isFinite(Number(currentStock)) ? Number(currentStock) + 1 : currentStock);
-                    throw error;
-                }
+                await set(
+                    ref(
+                        db,
+                        `carts/${currentUser.uid}/${productId}`
+                    ),
+                    cartItem
+                );
 
 
                 cartItems[productId] =

@@ -901,26 +901,30 @@
                     }));
                 }
 
-                const specialOrdersSnapshot = await get(ref(db, "specialOrders"));
-                if (specialOrdersSnapshot.exists()) {
-                    const specialOrders = specialOrdersSnapshot.val() || {};
+                try {
+                    const specialOrdersSnapshot = await get(ref(db, "specialOrders"));
+                    if (specialOrdersSnapshot.exists()) {
+                        const specialOrders = specialOrdersSnapshot.val() || {};
 
-                    allOrders.push(
-                        ...Object.entries(specialOrders)
-                            .filter(([, value]) => value?.userId === user.uid)
-                            .map(([key, value]) => ({
-                                ...(value || {}),
-                                id: value?.orderId || key,
-                                orderId: value?.orderId || key,
-                                specialOrder: true,
-                                items: [{
-                                    name: value?.description || value?.request || "Special order request",
-                                    quantity: 1,
-                                    price: Number(value?.total ?? value?.price) || 0
-                                }],
-                                total: Number(value?.total ?? value?.price) || 0
-                            }))
-                    );
+                        allOrders.push(
+                            ...Object.entries(specialOrders)
+                                .filter(([, value]) => value?.userId === user.uid)
+                                .map(([key, value]) => ({
+                                    ...(value || {}),
+                                    id: value?.orderId || key,
+                                    orderId: value?.orderId || key,
+                                    specialOrder: true,
+                                    items: [{
+                                        name: value?.description || value?.request || "Special order request",
+                                        quantity: 1,
+                                        price: Number(value?.total ?? value?.price) || 0
+                                    }],
+                                    total: Number(value?.total ?? value?.price) || 0
+                                }))
+                        );
+                    }
+                } catch (specialOrdersError) {
+                    console.warn("Special orders are unavailable for this account:", specialOrdersError);
                 }
 
                 allOrders.sort(
