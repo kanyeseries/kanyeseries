@@ -25,10 +25,10 @@ to enforce admin access server-side.
 
 CLOUDINARY
 ----------
-Cloud name: fjlfvpsp
-Unsigned upload preset: kanye_products
+Cloud name: garfgnqe
+Unsigned upload preset: kanyeseries
 Upload endpoint:
-https://api.cloudinary.com/v1_1/fjlfvpsp/image/upload
+https://api.cloudinary.com/v1_1/garfgnqe/image/upload
 
 ORDER PATH NOTE
 ---------------

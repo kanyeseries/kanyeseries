@@ -59,11 +59,11 @@ Use Cloudinary instead of Firebase Storage.
 
 Cloudinary Cloud Name:
 
-fjifvpsp
+garfgnqe
 
 Cloudinary Upload Preset:
 
-kanye_products
+kanyeseries
 
 RELEVANT JAVASCRIPT LIBRARIES:
 
@@ -160,13 +160,13 @@ Firebase SDK version:
 Use this configuration:
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDGpgx9033X1_KUiodxLsT3J5lKB4hQTJc",
-    authDomain: "kanye-series.firebaseapp.com",
-    projectId: "kanye-series",
-    storageBucket: "kanye-series.firebasestorage.app",
-    messagingSenderId: "518877515683",
-    appId: "1:518877515683:web:672b69c89fe89a882fd416",
-    measurementId: "G-MCMYRNCWVC"
+    apiKey: "AIzaSyBx-4BgpCY5OuKRzifPv2xQBtQ8w323wis",
+    authDomain: "kanyeseries-d511b.firebaseapp.com",
+    projectId: "kanyeseries-d511b",
+    storageBucket: "kanyeseries-d511b.firebasestorage.app",
+    messagingSenderId: "212048886528",
+    appId: "1:212048886528:web:235f96016a4de83ec991e5",
+    measurementId: "G-7LS8NYFX7Y"
 };
 
 Use the Firebase Modular SDK.
@@ -421,15 +421,15 @@ Cloudinary is the official image storage system for Kanye Series.
 
 Cloudinary Cloud Name:
 
-fjifvpsp
+garfgnqe
 
 Upload Preset:
 
-kanye_products
+kanyeseries
 
 Cloudinary upload endpoint:
 
-https://api.cloudinary.com/v1_1/fjifvpsp/image/upload
+https://api.cloudinary.com/v1_1/garfgnqe/image/upload
 
 
 ==================================================
@@ -448,12 +448,12 @@ Do NOT use Firebase Storage.
 Example:
 
 const cloudinaryUploadUrl =
-    "https://api.cloudinary.com/v1_1/fjifvpsp/image/upload";
+    "https://api.cloudinary.com/v1_1/garfgnqe/image/upload";
 
 const formData = new FormData();
 
 formData.append("file", file);
-formData.append("upload_preset", "kanye_products");
+formData.append("upload_preset", "kanyeseries");
 
 const response = await fetch(
     cloudinaryUploadUrl,
@@ -1122,15 +1122,15 @@ Responsible for image storage.
 
 Cloud Name:
 
-fjifvpsp
+garfgnqe
 
 Upload Preset:
 
-kanye_products
+kanyeseries
 
 Upload URL:
 
-https://api.cloudinary.com/v1_1/fjifvpsp/image/upload
+https://api.cloudinary.com/v1_1/garfgnqe/image/upload
 
 Do not use Firebase Storage for application images.
 
