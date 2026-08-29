@@ -9,6 +9,13 @@
         name="description"
         content="Discover premium shoes, electronics, secondary science books and special orders at Kanye Series."
     >
+    <meta name="theme-color" content="#1e3a8a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Kanye Series">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="./images/logo.png">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -33,6 +40,7 @@
 
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script defer src="./js/pwa.js"></script>
 
     <style>
         :root {
@@ -459,7 +467,7 @@
                                         >
                                             <a
                                                 href="products.html?category=shoes"
-                                                class="focus-ring inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-blue-950 shadow-lg hover:bg-[...]
+                                                class="focus-ring inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-blue-950 shadow-lg hover:bg-blue-50"
                                             >
                                                 Shop Shoes
                                                 <i class="bi bi-arrow-right"></i>
@@ -467,7 +475,7 @@
 
                                             <a
                                                 href="products.html"
-                                                class="focus-ring inline-flex items-center justify-center gap-2 rounded-xl border border-white/50 bg-white/10 px-6 py-3.5 text-sm font-bold text-wh[...]
+                                                class="focus-ring inline-flex items-center justify-center gap-2 rounded-xl border border-white/50 bg-white/10 px-6 py-3.5 text-sm font-bold text-white backdrop-blur-sm hover:bg-white/20"
                                             >
                                                 Explore Products
                                             </a>
@@ -528,7 +536,7 @@
                                         >
                                             <a
                                                 href="products.html?category=electronics"
-                                                class="focus-ring inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-blue-950 shadow-lg hover:bg-[...]
+                                                class="focus-ring inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-blue-950 shadow-lg hover:bg-blue-50"
                                             >
                                                 Shop Electronics
                                                 <i class="bi bi-arrow-right"></i>
@@ -590,7 +598,7 @@
                                         >
                                             <a
                                                 href="products.html?category=books"
-                                                class="focus-ring inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-blue-950 shadow-lg hover:bg-[...]
+                                                class="focus-ring inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-blue-950 shadow-lg hover:bg-blue-50"
                                             >
                                                 Shop Books
                                                 <i class="bi bi-arrow-right"></i>
@@ -998,66 +1006,69 @@
                             <i class="bi bi-award text-xl"></i>
                         </div>
 
-                        <h3 class="mt-4 font-semibold text-slate-900">
-                            Premium Quality
+                        <h3 class="mt-5 font-bold text-blue-950">
+                            Quality Products
                         </h3>
 
-                        <p class="mt-2 text-sm text-slate-500">
-                            Hand-selected products for quality and durability.
+                        <p class="mt-2 text-sm leading-6 text-slate-500">
+                            Carefully selected products for everyday needs.
                         </p>
                     </div>
+
 
                     <div
                         class="rounded-2xl border border-slate-200 bg-slate-50 p-6"
                         data-aos="fade-up"
                         data-aos-delay="80"
                     >
-                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-green-100 text-green-800">
-                            <i class="bi bi-truck text-xl"></i>
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-800">
+                            <i class="bi bi-wallet2 text-xl"></i>
                         </div>
 
-                        <h3 class="mt-4 font-semibold text-slate-900">
-                            Fast Delivery
+                        <h3 class="mt-5 font-bold text-blue-950">
+                            Fair Prices
                         </h3>
 
-                        <p class="mt-2 text-sm text-slate-500">
-                            Quick and reliable shipping to your doorstep.
+                        <p class="mt-2 text-sm leading-6 text-slate-500">
+                            Straightforward pricing without unnecessary fees.
                         </p>
                     </div>
+
 
                     <div
                         class="rounded-2xl border border-slate-200 bg-slate-50 p-6"
                         data-aos="fade-up"
                         data-aos-delay="160"
                     >
-                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-100 text-orange-800">
-                            <i class="bi bi-shield-check text-xl"></i>
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-800">
+                            <i class="bi bi-headset text-xl"></i>
                         </div>
 
-                        <h3 class="mt-4 font-semibold text-slate-900">
-                            Secure Checkout
+                        <h3 class="mt-5 font-bold text-blue-950">
+                            Reliable Service
                         </h3>
 
-                        <p class="mt-2 text-sm text-slate-500">
-                            Safe and encrypted payment processing.
+                        <p class="mt-2 text-sm leading-6 text-slate-500">
+                            Clear communication throughout your shopping journey.
                         </p>
                     </div>
+
 
                     <div
                         class="rounded-2xl border border-slate-200 bg-slate-50 p-6"
                         data-aos="fade-up"
                         data-aos-delay="240"
                     >
-                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-100 text-purple-800">
-                            <i class="bi bi-headset text-xl"></i>
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-800">
+                            <i class="bi bi-shield-check text-xl"></i>
                         </div>
 
-                        <h3 class="mt-4 font-semibold text-slate-900">
-                            24/7 Support
+                        <h3 class="mt-5 font-bold text-blue-950">
+                            Secure Accounts
                         </h3>
 
-                        <p class="mt-2 text-sm text-slate-500">
-                            Dedicated customer service always ready to help.
+                        <p class="mt-2 text-sm leading-6 text-slate-500">
+                            Customer authentication is handled through Firebase Authentication.
                         </p>
                     </div>
 
@@ -1065,64 +1076,1768 @@
             </div>
         </section>
 
+
+        <!-- ===================================================== -->
+        <!-- CONTACT -->
+        <!-- ===================================================== -->
+
+        <section class="px-4 py-14 sm:px-6 lg:px-8">
+
+            <div class="mx-auto max-w-7xl">
+
+                <div
+                    class="overflow-hidden rounded-3xl bg-blue-950 shadow-xl"
+                    data-aos="fade-up"
+                >
+
+                    <div class="grid lg:grid-cols-2">
+
+                        <div class="p-7 sm:p-10 lg:p-14">
+
+                            <p class="text-sm font-bold uppercase tracking-[0.2em] text-blue-300">
+                                Need Help?
+                            </p>
+
+                            <h2 class="mt-2 text-3xl font-black text-white sm:text-4xl">
+                                Contact Kanye Series
+                            </h2>
+
+                            <p class="mt-4 max-w-xl text-sm leading-7 text-blue-100">
+                                Have a question about a product or need assistance?
+                                Contact us using the available channels.
+                            </p>
+
+                            <div class="mt-8 grid gap-3 sm:grid-cols-3">
+
+                                <a
+                                    href="mailto:kanyeseries@gmail.com"
+                                    class="focus-ring rounded-2xl bg-white/10 p-4 text-white hover:bg-white/15"
+                                >
+                                    <i class="bi bi-envelope text-xl text-blue-300"></i>
+                                    <p class="mt-3 text-sm font-bold">Email</p>
+                                    <p class="mt-1 break-all text-xs text-blue-200">
+                                        kanyeseries@gmail.com
+                                    </p>
+                                </a>
+
+                                <a
+                                    href="https://wa.me/256776150476"
+                                    class="focus-ring rounded-2xl bg-white/10 p-4 text-white hover:bg-white/15"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <i class="bi bi-whatsapp text-xl text-blue-300"></i>
+                                    <p class="mt-3 text-sm font-bold">WhatsApp</p>
+                                    <p class="mt-1 text-xs text-blue-200">
+                                        Chat with us
+                                    </p>
+                                </a>
+
+                                <a
+                                    href="tel:+256776150476"
+                                    class="focus-ring rounded-2xl bg-white/10 p-4 text-white hover:bg-white/15"
+                                >
+                                    <i class="bi bi-telephone text-xl text-blue-300"></i>
+                                    <p class="mt-3 text-sm font-bold">Call</p>
+                                    <p class="mt-1 text-xs text-blue-200">
+                                        0776 150 476
+                                    </p>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                        <div class="hidden min-h-full lg:block">
+                            <img
+                                src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&auto=format&fit=crop&q=80"
+                                alt="Kanye Series shopping experience"
+                                class="h-full w-full object-cover"
+                                loading="lazy"
+                            >
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ===================================================== -->
+        <!-- FOOTER -->
+        <!-- ===================================================== -->
+
+        <footer class="bg-slate-950 px-4 pb-28 pt-12 text-slate-300 sm:px-6 lg:px-8 lg:pb-12">
+
+            <div class="mx-auto max-w-7xl">
+
+                <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+
+                    <!-- Brand -->
+                    <div>
+
+                        <a
+                            href="index.html"
+                            class="flex items-center gap-3 text-white"
+                        >
+                            <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-700">
+                                <img src="./images/logo2.png" alt="Kanye Series" class="h-9 w-9 object-contain">
+                            </span>
+
+                            <span class="text-lg font-black tracking-wide">
+                                KANYE SERIES
+                            </span>
+                        </a>
+
+                        <p class="mt-4 max-w-sm text-sm leading-7 text-slate-400">
+                            A modern e-commerce platform for shoes, electronics,
+                            secondary science books and special orders.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Quick Links -->
+                    <div>
+
+                        <h3 class="font-bold text-white">
+                            Quick Links
+                        </h3>
+
+                        <ul class="mt-4 space-y-3 text-sm">
+
+                            <li>
+                                <a href="index.html" class="hover:text-white">
+                                    Home
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="products.html" class="hover:text-white">
+                                    Products
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="orders.html" class="hover:text-white">
+                                    Orders
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="profile.html" class="hover:text-white">
+                                    Profile
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <!-- Categories -->
+                    <div>
+
+                        <h3 class="font-bold text-white">
+                            Categories
+                        </h3>
+
+                        <ul class="mt-4 space-y-3 text-sm">
+
+                            <li>
+                                <a
+                                    href="products.html?category=shoes"
+                                    class="hover:text-white"
+                                >
+                                    Shoes
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="products.html?category=electronics"
+                                    class="hover:text-white"
+                                >
+                                    Electronics
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="products.html?category=books"
+                                    class="hover:text-white"
+                                >
+                                    Books
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="special-orders.html"
+                                    class="hover:text-white"
+                                >
+                                    Special Orders
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <!-- Account -->
+                    <div>
+
+                        <h3 class="font-bold text-white">
+                            Account
+                        </h3>
+
+                        <ul class="mt-4 space-y-3 text-sm">
+
+                            <li>
+                                <a
+                                    href="login.html"
+                                    id="footerLoginLink"
+                                    class="hover:text-white"
+                                >
+                                    Login
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="wishlist.html"
+                                    class="hover:text-white"
+                                >
+                                    Wishlist
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="cart.html"
+                                    class="hover:text-white"
+                                >
+                                    Cart
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="profile.html"
+                                    class="hover:text-white"
+                                >
+                                    Profile
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mt-10 border-t border-slate-800 pt-6">
+
+                    <div class="flex flex-col gap-4 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+
+                        <p>
+                            © <span id="currentYear"></span> Kanye Series. All rights reserved.
+                        </p>
+
+                        <p>
+                            Built for simple, modern shopping.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </footer>
+
     </main>
 
-    <!-- Swiper JS -->
+
+    <!-- ========================================================= -->
+    <!-- MOBILE BOTTOM NAVIGATION -->
+    <!-- ========================================================= -->
+
+     <nav class="fixed bottom-0 left-0 right-0 z-50 border-t border-slate-200 bg-white/95 shadow-2xl backdrop-blur md:block lg:hidden"
+         aria-label="Mobile and tablet navigation">
+        <div class="mx-auto grid max-w-lg grid-cols-4">
+            <a href="index.html" class="flex flex-col items-center gap-1 px-2 py-3 text-blue-800 hover:text-blue-800" aria-label="Home">
+                <i class="bi bi-house-door-fill text-lg"></i>
+                <span class="text-[11px] font-semibold">Home</span>
+            </a>
+            <a href="products.html" class="flex flex-col items-center gap-1 px-2 py-3 text-slate-500 hover:text-blue-800" aria-label="Products">
+                <i class="bi bi-grid text-lg"></i>
+                <span class="text-[11px] font-semibold">Products</span>
+            </a>
+            <a href="orders.html" class="flex flex-col items-center gap-1 px-2 py-3 text-slate-500 hover:text-blue-800" aria-label="Orders">
+                <i class="bi bi-bag-check text-lg"></i>
+                <span class="text-[11px] font-semibold">Orders</span>
+            </a>
+            <a href="profile.html" class="flex flex-col items-center gap-1 px-2 py-3 text-slate-500 hover:text-blue-800" aria-label="Profile">
+                <i class="bi bi-person text-lg"></i>
+                <span class="text-[11px] font-semibold">Profile</span>
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- ========================================================= -->
+    <!-- LIBRARIES -->
+    <!-- ========================================================= -->
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    <!-- AOS JS -->
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
-    <script>
-        // Initialize Swiper
-        const heroSwiper = new Swiper('.heroSwiper', {
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev'
-            },
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false
+
+    <!-- ========================================================= -->
+    <!-- FIREBASE + HOME PAGE JAVASCRIPT -->
+    <!-- ========================================================= -->
+
+    <script type="module">
+
+        // ========================================
+        // FIREBASE IMPORTS
+        // ========================================
+
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+
+        import {
+            getAuth,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+        import {
+            getDatabase,
+            ref,
+            get,
+            set,
+            update,
+            onValue,
+            runTransaction
+        } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
+
+
+        // ========================================
+        // FIREBASE CONFIGURATION
+        // ========================================
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBx-4BgpCY5OuKRzifPv2xQBtQ8w323wis",
+            authDomain: "kanyeseries-d511b.firebaseapp.com",
+            projectId: "kanyeseries-d511b",
+            storageBucket: "kanyeseries-d511b.firebasestorage.app",
+            messagingSenderId: "212048886528",
+            appId: "1:212048886528:web:235f96016a4de83ec991e5",
+            measurementId: "G-7LS8NYFX7Y"
+        };
+
+
+        // ========================================
+        // FIREBASE INITIALIZATION
+        // ========================================
+
+        const app = initializeApp(firebaseConfig);
+
+        const auth = getAuth(app);
+
+        const db = getDatabase(app);
+
+
+        // ========================================
+        // CLOUDINARY CONFIGURATION
+        // ========================================
+
+        const cloudinaryCloudName = "garfgnqe";
+        const cloudinaryUploadPreset = "kanyeseries";
+        const cloudinaryUploadUrl =
+            "https://api.cloudinary.com/v1_1/garfgnqe/image/upload";
+
+
+        // The home page only reads Cloudinary URLs.
+        // No image upload is performed here.
+
+
+        // ========================================
+        // DOM ELEMENTS
+        // ========================================
+
+        const searchBtn =
+            document.getElementById("searchBtn");
+
+        const searchPanel =
+            document.getElementById("searchPanel");
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+        const clearSearchBtn =
+            document.getElementById("clearSearchBtn");
+
+        const searchResults =
+            document.getElementById("searchResults");
+
+        const featuredLoading =
+            document.getElementById("featuredLoading");
+
+        const featuredProducts =
+            document.getElementById("featuredProducts");
+
+        const featuredEmpty =
+            document.getElementById("featuredEmpty");
+
+        const latestLoading =
+            document.getElementById("latestLoading");
+
+        const latestProducts =
+            document.getElementById("latestProducts");
+
+        const latestEmpty =
+            document.getElementById("latestEmpty");
+
+        const cartCount =
+            document.getElementById("cartCount");
+
+        const wishlistCount =
+            document.getElementById("wishlistCount");
+
+        const footerLoginLink =
+            document.getElementById("footerLoginLink");
+
+
+        // ========================================
+        // APPLICATION STATE
+        // ========================================
+
+        let allProducts = [];
+
+        let currentUser = null;
+
+        let wishlistItems = {};
+
+        let cartItems = {};
+
+        let wishlistListenerCleanup = null;
+
+        let searchTimeout = null;
+
+
+        // ========================================
+        // HELPERS
+        // ========================================
+
+        function escapeHtml(value) {
+
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+
+        function normalizeCategory(category) {
+
+            return String(category || "")
+                .trim()
+                .toLowerCase();
+        }
+
+
+        function formatCurrency(value) {
+
+            const amount =
+                Number(value) || 0;
+
+            return `UGX ${amount.toLocaleString("en-UG")}`;
+        }
+
+
+        function getProductImage(product) {
+
+            if (
+                Array.isArray(product.images) &&
+                product.images.length > 0
+            ) {
+                return product.images[0];
             }
+
+            if (
+                product.images &&
+                typeof product.images === "object"
+            ) {
+                const firstImage =
+                    Object.values(product.images)[0];
+
+                if (firstImage) {
+                    return firstImage;
+                }
+            }
+
+            if (product.image) {
+                return product.image;
+            }
+
+            return "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=700&auto=format&fit=crop&q=75";
+        }
+
+
+        function getProductId(product) {
+
+            return String(
+                product.id ??
+                product.productId ??
+                ""
+            );
+        }
+
+
+        function isProductAvailable(product) {
+
+            return Number(product.stock ?? 0) > 0;
+        }
+
+
+        function productDetailsUrl(productId) {
+
+            return `product.html?id=${encodeURIComponent(productId)}`;
+        }
+
+
+        function showMessage(
+            title,
+            text,
+            icon = "info"
+        ) {
+
+            if (window.Swal) {
+
+                Swal.fire({
+                    title,
+                    text,
+                    icon,
+                    confirmButtonColor: "#1e3a8a",
+                    confirmButtonText: "OK"
+                });
+
+                return;
+            }
+
+            alert(`${title}\n\n${text}`);
+        }
+
+
+        // ========================================
+        // AUTHENTICATION STATE
+        // ========================================
+
+        onAuthStateChanged(auth, async (user) => {
+
+            currentUser = user;
+
+            if (!user) {
+
+                wishlistItems = {};
+                cartItems = {};
+
+                updateWishlistCount();
+                updateCartCount();
+
+                footerLoginLink.textContent =
+                    "Login";
+
+                footerLoginLink.href =
+                    "login.html";
+
+                return;
+            }
+
+
+            footerLoginLink.textContent =
+                "Profile";
+
+            footerLoginLink.href =
+                "profile.html";
+
+
+            await loadUserShoppingData(user.uid);
+
         });
 
-        // Initialize AOS
-        AOS.init({
-            duration: 800,
-            once: true
-        });
 
-        // Search functionality
-        const searchBtn = document.getElementById('searchBtn');
-        const searchPanel = document.getElementById('searchPanel');
-        const searchInput = document.getElementById('searchInput');
-        const clearSearchBtn = document.getElementById('clearSearchBtn');
-        const searchResults = document.getElementById('searchResults');
+        // ========================================
+        // LOAD USER SHOPPING DATA
+        // ========================================
 
-        searchBtn.addEventListener('click', () => {
-            searchPanel.classList.toggle('hidden');
-            searchBtn.setAttribute('aria-expanded', searchPanel.classList.contains('hidden') ? 'false' : 'true');
-            if (!searchPanel.classList.contains('hidden')) {
+        function attachWishlistListener(uid) {
+
+            if (wishlistListenerCleanup) {
+                wishlistListenerCleanup();
+                wishlistListenerCleanup = null;
+            }
+
+            const wishlistRef = ref(db, `wishlists/${uid}`);
+
+            wishlistListenerCleanup = onValue(
+                wishlistRef,
+                (snapshot) => {
+                    wishlistItems = snapshot.exists()
+                        ? snapshot.val() || {}
+                        : {};
+
+                    updateWishlistCount();
+                    refreshProductCardStates();
+                },
+                (error) => {
+                    console.error("Wishlist listener error:", error);
+                    wishlistItems = {};
+                    updateWishlistCount();
+                    refreshProductCardStates();
+                }
+            );
+        }
+
+
+        async function loadUserShoppingData(uid) {
+
+            try {
+
+                const cartSnapshot = await get(
+                    ref(
+                        db,
+                        `carts/${uid}`
+                    )
+                );
+
+                cartItems =
+                    cartSnapshot.exists()
+                        ? cartSnapshot.val() || {}
+                        : {};
+
+                attachWishlistListener(uid);
+                updateCartCount();
+
+            } catch (error) {
+
+                console.error(
+                    "Unable to load user shopping data:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        // ========================================
+        // CART COUNT
+        // ========================================
+
+        function updateCartCount() {
+
+            const count =
+                Object.values(cartItems)
+                    .reduce(
+                        (total, item) =>
+                            total +
+                            Number(item?.quantity || 0),
+                        0
+                    );
+
+            cartCount.textContent =
+                count.toLocaleString();
+
+            cartCount.classList.toggle(
+                "hidden",
+                count <= 0
+            );
+
+        }
+
+
+        // ========================================
+        // WISHLIST COUNT
+        // ========================================
+
+        function updateWishlistCount() {
+
+            const count =
+                Object.values(wishlistItems)
+                    .filter(Boolean)
+                    .length;
+
+            wishlistCount.textContent =
+                count.toLocaleString();
+
+            wishlistCount.classList.toggle(
+                "hidden",
+                count <= 0
+            );
+
+        }
+
+
+        // ========================================
+        // LOAD PRODUCTS
+        // ========================================
+
+        async function loadProducts() {
+
+            try {
+
+                const snapshot =
+                    await get(
+                        ref(db, "products")
+                    );
+
+
+                if (!snapshot.exists()) {
+
+                    allProducts = [];
+
+                } else {
+
+                    const data =
+                        snapshot.val() || {};
+
+                    allProducts =
+                        Object.entries(data)
+                            .map(
+                                ([id, product]) => ({
+                                    id,
+                                    ...(product || {})
+                                })
+                            )
+                            .filter(
+                                product =>
+                                    product &&
+                                    product.name
+                            );
+
+                }
+
+
+                renderFeaturedProducts();
+
+                renderLatestProducts();
+
+            } catch (error) {
+
+                console.error(
+                    "Error loading products:",
+                    error
+                );
+
+                showProductErrorStates();
+
+            }
+
+        }
+
+
+        // ========================================
+        // FEATURED PRODUCTS
+        // ========================================
+
+        function renderFeaturedProducts() {
+
+            featuredLoading.classList.add("hidden");
+
+            const featured =
+                allProducts
+                    .filter(
+                        product =>
+                            product.featured === true ||
+                            product.featured === "true"
+                    )
+                    .filter(
+                        product =>
+                            isProductAvailable(product)
+                    )
+                    .slice(0, 6);
+
+
+            if (featured.length === 0) {
+
+                featuredProducts.classList.add("hidden");
+                featuredEmpty.classList.remove("hidden");
+
+                return;
+            }
+
+
+            featuredEmpty.classList.add("hidden");
+            featuredProducts.classList.remove("hidden");
+
+            featuredProducts.innerHTML =
+                featured
+                    .map(createProductCard)
+                    .join("");
+
+
+            attachProductActions(
+                featuredProducts
+            );
+
+            if (window.AOS) {
+                AOS.refresh();
+            }
+
+        }
+
+
+        // ========================================
+        // LATEST PRODUCTS
+        // ========================================
+
+        function renderLatestProducts() {
+
+            latestLoading.classList.add("hidden");
+
+            const latest =
+                [...allProducts]
+                    .filter(
+                        product =>
+                            isProductAvailable(product)
+                    )
+                    .sort(
+                        (a, b) =>
+                            Number(b.createdAt || 0) -
+                            Number(a.createdAt || 0)
+                    )
+                    .slice(0, 4);
+
+
+            if (latest.length === 0) {
+
+                latestProducts.classList.add("hidden");
+                latestEmpty.classList.remove("hidden");
+
+                return;
+            }
+
+
+            latestEmpty.classList.add("hidden");
+            latestProducts.classList.remove("hidden");
+
+            latestProducts.innerHTML =
+                latest
+                    .map(createProductCard)
+                    .join("");
+
+
+            attachProductActions(
+                latestProducts
+            );
+
+            if (window.AOS) {
+                AOS.refresh();
+            }
+
+        }
+
+
+        // ========================================
+        // PRODUCT CARD
+        // ========================================
+
+        function createProductCard(product) {
+
+            const productId =
+                getProductId(product);
+
+            const image =
+                getProductImage(product);
+
+            const name =
+                escapeHtml(product.name);
+
+            const category =
+                escapeHtml(product.category || "Product");
+
+            const price =
+                formatCurrency(product.price);
+
+            const stock =
+                Number(product.stock || 0);
+
+            const isWishlisted =
+                Boolean(
+                    wishlistItems[productId]
+                );
+
+
+            return `
+                <article
+                    class="product-card overflow-hidden rounded-2xl border border-slate-200 bg-white"
+                    data-aos="fade-up"
+                >
+
+                    <div class="relative aspect-square overflow-hidden bg-slate-100">
+
+                        <a
+                            href="${productDetailsUrl(productId)}"
+                            class="focus-ring block h-full w-full"
+                            aria-label="View ${name}"
+                        >
+                            <img
+                                src="${escapeHtml(image)}"
+                                alt="${name}"
+                                class="product-image h-full w-full object-cover"
+                                loading="lazy"
+                                decoding="async"
+                            >
+                        </a>
+
+
+                        ${
+                            product.featured === true ||
+                            product.featured === "true"
+                                ? `
+                                    <span class="absolute left-2 top-2 rounded-full bg-blue-900 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
+                                        Featured
+                                    </span>
+                                `
+                                : ""
+                        }
+
+
+                        <button
+                            type="button"
+                            class="wishlist-action focus-ring absolute right-2 top-2 flex h-9 w-9 items-center justify-center rounded-full ${
+                                isWishlisted
+                                    ? "bg-red-500 text-white"
+                                    : "bg-white/90 text-slate-700"
+                            } shadow-md backdrop-blur-sm hover:scale-105"
+                            data-product-id="${escapeHtml(productId)}"
+                            aria-label="${
+                                isWishlisted
+                                    ? "Remove from wishlist"
+                                    : "Add to wishlist"
+                            }"
+                        >
+                            <i class="bi ${
+                                isWishlisted
+                                    ? "bi-heart-fill"
+                                    : "bi-heart"
+                            }"></i>
+                        </button>
+
+                    </div>
+
+
+                    <div class="p-3.5 sm:p-4">
+
+                        <p class="text-[10px] font-bold uppercase tracking-[0.15em] text-blue-600">
+                            ${category}
+                        </p>
+
+                        <a
+                            href="${productDetailsUrl(productId)}"
+                            class="focus-ring mt-1 block"
+                        >
+                            <h3 class="line-clamp-2 min-h-[40px] text-sm font-bold leading-5 text-blue-950 sm:text-base">
+                                ${name}
+                            </h3>
+                        </a>
+
+
+                        <div class="mt-3">
+
+                            <p class="text-base font-black text-blue-800 sm:text-lg">
+                                ${price}
+                            </p>
+
+                            <p class="mt-1 text-[11px] ${
+                                stock > 0
+                                    ? "text-emerald-600"
+                                    : "text-red-500"
+                            }">
+                                ${
+                                    stock > 0
+                                        ? `${stock} in stock`
+                                        : "Out of stock"
+                                }
+                            </p>
+
+                        </div>
+
+
+                        <div class="mt-3 flex gap-2">
+
+                            <button
+                                type="button"
+                                class="cart-action focus-ring flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-blue-900 px-2 py-2.5 text-xs font-bold text-white hover:bg-blue-800 disabled:cursor-not-allowed disabled:bg-slate-300"
+                                data-product-id="${escapeHtml(productId)}"
+                                ${stock <= 0 ? "disabled" : ""}
+                                aria-label="Add ${name} to cart"
+                            >
+                                <i class="bi bi-cart-plus"></i>
+                                <span>Add</span>
+                            </button>
+
+                            <a
+                                href="${productDetailsUrl(productId)}"
+                                class="focus-ring flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 text-blue-900 hover:bg-blue-50"
+                                aria-label="View ${name}"
+                            >
+                                <i class="bi bi-arrow-up-right"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+            `;
+
+        }
+
+
+        // ========================================
+        // PRODUCT ACTIONS
+        // ========================================
+
+        function attachProductActions(container) {
+
+            container
+                .querySelectorAll(".cart-action")
+                .forEach(button => {
+
+                    button.addEventListener(
+                        "click",
+                        async event => {
+
+                            event.preventDefault();
+                            event.stopPropagation();
+
+                            const productId =
+                                button.dataset.productId;
+
+                            await addToCart(
+                                productId,
+                                button
+                            );
+
+                        }
+                    );
+
+                });
+
+
+            container
+                .querySelectorAll(".wishlist-action")
+                .forEach(button => {
+
+                    button.addEventListener(
+                        "click",
+                        async event => {
+
+                            event.preventDefault();
+                            event.stopPropagation();
+
+                            const productId =
+                                button.dataset.productId;
+
+                            await toggleWishlist(
+                                productId,
+                                button
+                            );
+
+                        }
+                    );
+
+                });
+
+        }
+
+
+        // ========================================
+        // ADD TO CART
+        // ========================================
+
+        async function addToCart(
+            productId,
+            button
+        ) {
+
+            if (!currentUser) {
+
+                showMessage(
+                    "Login required",
+                    "Please log in to add products to your cart.",
+                    "info"
+                );
+
+                setTimeout(
+                    () => {
+                        window.location.href =
+                            "login.html";
+                    },
+                    1200
+                );
+
+                return;
+            }
+
+
+            const product =
+                allProducts.find(
+                    item =>
+                        getProductId(item) ===
+                        String(productId)
+                );
+
+
+            if (!product) {
+
+                showMessage(
+                    "Product unavailable",
+                    "This product could not be found.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            if (!isProductAvailable(product)) {
+
+                showMessage(
+                    "Out of stock",
+                    "This product is currently unavailable.",
+                    "warning"
+                );
+
+                return;
+            }
+
+
+            const originalText =
+                button.innerHTML;
+
+            button.disabled = true;
+
+            button.innerHTML =
+                `<i class="bi bi-arrow-repeat animate-spin"></i>`;
+
+
+            try {
+
+                const existing =
+                    cartItems[productId] || null;
+
+                const currentQuantity =
+                    Number(
+                        existing?.quantity || 0
+                    );
+
+                const cartItem = {
+
+                    productId,
+
+                    name: product.name,
+
+                    price: Number(
+                        product.price || 0
+                    ),
+
+                    image: getProductImage(
+                        product
+                    ),
+
+                    quantity:
+                        currentQuantity + 1,
+
+                    stockReserved:
+                        Math.max(0, Number(existing?.stockReserved) || 0) + 1,
+
+                    addedAt:
+                        existing?.addedAt ||
+                        Date.now()
+
+                };
+
+
+                await set(
+                    ref(
+                        db,
+                        `carts/${currentUser.uid}/${productId}`
+                    ),
+                    cartItem
+                );
+
+
+                cartItems[productId] =
+                    cartItem;
+
+
+                updateCartCount();
+
+
+                showMessage(
+                    "Added to cart",
+                    `${product.name} has been added to your cart.`,
+                    "success"
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Error adding product to cart:",
+                    error
+                );
+
+                showMessage(
+                    "Unable to add product",
+                    "Please try again.",
+                    "error"
+                );
+
+            } finally {
+
+                button.disabled = false;
+
+                button.innerHTML =
+                    originalText;
+
+            }
+
+        }
+
+
+        // ========================================
+        // WISHLIST
+        // ========================================
+
+        async function toggleWishlist(
+            productId,
+            button
+        ) {
+
+            if (!currentUser) {
+
+                showMessage(
+                    "Login required",
+                    "Please log in to manage your wishlist.",
+                    "info"
+                );
+
+                setTimeout(
+                    () => {
+                        window.location.href =
+                            "login.html";
+                    },
+                    1200
+                );
+
+                return;
+            }
+
+
+            const isActive =
+                Boolean(
+                    wishlistItems[productId]
+                );
+
+
+            try {
+
+                if (isActive) {
+
+                    await update(
+                        ref(
+                            db,
+                            `wishlists/${currentUser.uid}`
+                        ),
+                        {
+                            [productId]: null
+                        }
+                    );
+
+                    delete wishlistItems[
+                        productId
+                    ];
+
+                } else {
+
+                    await set(
+                        ref(
+                            db,
+                            `wishlists/${currentUser.uid}/${productId}`
+                        ),
+                        true
+                    );
+
+                    wishlistItems[
+                        productId
+                    ] = true;
+
+                }
+
+
+                updateWishlistCount();
+
+                refreshProductCardStates();
+
+            } catch (error) {
+
+                console.error(
+                    "Error updating wishlist:",
+                    error
+                );
+
+                showMessage(
+                    "Unable to update wishlist",
+                    "Please try again.",
+                    "error"
+                );
+
+            }
+
+        }
+
+
+        // ========================================
+        // REFRESH PRODUCT CARD WISHLIST STATES
+        // ========================================
+
+        function refreshProductCardStates() {
+
+            document
+                .querySelectorAll(
+                    ".wishlist-action"
+                )
+                .forEach(button => {
+
+                    const productId =
+                        button.dataset.productId;
+
+                    const active =
+                        Boolean(
+                            wishlistItems[
+                                productId
+                            ]
+                        );
+
+                    button.classList.toggle(
+                        "bg-red-500",
+                        active
+                    );
+
+                    button.classList.toggle(
+                        "text-white",
+                        active
+                    );
+
+                    button.classList.toggle(
+                        "bg-white/90",
+                        !active
+                    );
+
+                    button.classList.toggle(
+                        "text-slate-700",
+                        !active
+                    );
+
+                    button.innerHTML =
+                        `<i class="bi ${
+                            active
+                                ? "bi-heart-fill"
+                                : "bi-heart"
+                        }"></i>`;
+
+                    button.setAttribute(
+                        "aria-label",
+                        active
+                            ? "Remove from wishlist"
+                            : "Add to wishlist"
+                    );
+
+                });
+
+        }
+
+
+        // ========================================
+        // SEARCH
+        // ========================================
+
+        searchBtn.addEventListener(
+            "click",
+            () => {
+
+                const isHidden =
+                    searchPanel.classList.contains(
+                        "hidden"
+                    );
+
+
+                searchPanel.classList.toggle(
+                    "hidden"
+                );
+
+                searchBtn.setAttribute(
+                    "aria-expanded",
+                    String(isHidden)
+                );
+
+
+                if (isHidden) {
+
+                    setTimeout(
+                        () => searchInput.focus(),
+                        50
+                    );
+
+                } else {
+
+                    searchInput.value = "";
+
+                    searchResults.classList.add(
+                        "hidden"
+                    );
+
+                    searchResults.innerHTML = "";
+
+                }
+
+            }
+        );
+
+
+        clearSearchBtn.addEventListener(
+            "click",
+            () => {
+
+                searchInput.value = "";
+
+                clearSearchBtn.classList.add(
+                    "hidden"
+                );
+
+                searchResults.classList.add(
+                    "hidden"
+                );
+
+                searchResults.innerHTML = "";
+
                 searchInput.focus();
+
             }
-        });
+        );
 
-        searchInput.addEventListener('input', () => {
-            clearSearchBtn.classList.toggle('hidden', searchInput.value === '');
-        });
 
-        clearSearchBtn.addEventListener('click', () => {
-            searchInput.value = '';
-            clearSearchBtn.classList.add('hidden');
-            searchResults.classList.add('hidden');
-        });
+        searchInput.addEventListener(
+            "input",
+            () => {
+
+                const query =
+                    searchInput.value
+                        .trim()
+                        .toLowerCase();
+
+
+                clearSearchBtn.classList.toggle(
+                    "hidden",
+                    query.length === 0
+                );
+
+
+                clearTimeout(
+                    searchTimeout
+                );
+
+
+                searchTimeout =
+                    setTimeout(
+                        () => {
+
+                            if (!query) {
+
+                                searchResults.classList.add(
+                                    "hidden"
+                                );
+
+                                searchResults.innerHTML =
+                                    "";
+
+                                return;
+                            }
+
+
+                            const matches =
+                                allProducts
+                                    .filter(
+                                        product => {
+
+                                            const name =
+                                                String(
+                                                    product.name ||
+                                                    ""
+                                                ).toLowerCase();
+
+                                            const category =
+                                                String(
+                                                    product.category ||
+                                                    ""
+                                                ).toLowerCase();
+
+                                            return (
+                                                name.includes(
+                                                    query
+                                                ) ||
+                                                category.includes(
+                                                    query
+                                                )
+                                            );
+
+                                        }
+                                    )
+                                    .slice(0, 6);
+
+
+                            renderSearchResults(
+                                matches,
+                                query
+                            );
+
+                        },
+                        250
+                    );
+
+            }
+        );
+
+
+        // ========================================
+        // SEARCH RESULTS
+        // ========================================
+
+        function renderSearchResults(
+            matches,
+            query
+        ) {
+
+            searchResults.classList.remove(
+                "hidden"
+            );
+
+
+            if (matches.length === 0) {
+
+                searchResults.innerHTML = `
+                    <div class="rounded-xl border border-slate-200 bg-slate-50 p-5 text-center">
+                        <i class="bi bi-search text-2xl text-slate-300"></i>
+                        <p class="mt-2 text-sm font-semibold text-slate-700">
+                            No products found for "${escapeHtml(query)}".
+                        </p>
+                        <a
+                            href="products.html"
+                            class="mt-3 inline-flex text-xs font-bold text-blue-700 hover:text-blue-950"
+                        >
+                            Browse all products
+                        </a>
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            searchResults.innerHTML = `
+                <div class="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+
+                    <div class="mb-3 flex items-center justify-between px-2">
+                        <p class="text-xs font-bold uppercase tracking-wide text-slate-500">
+                            Search Results
+                        </p>
+
+                        <a
+                            href="products.html"
+                            class="text-xs font-bold text-blue-700 hover:text-blue-950"
+                        >
+                            View All
+                        </a>
+                    </div>
+
+                    <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+
+                        ${matches.map(product => {
+
+                            const id =
+                                getProductId(
+                                    product
+                                );
+
+                            return `
+                                <a
+                                    href="${productDetailsUrl(id)}"
+                                    class="focus-ring flex items-center gap-3 rounded-xl p-2 hover:bg-slate-50"
+                                >
+                                    <img
+                                        src="${escapeHtml(
+                                            getProductImage(
+                                                product
+                                            )
+                                        )}"
+                                        alt="${escapeHtml(product.name)}"
+                                        class="h-14 w-14 rounded-lg object-cover"
+                                        loading="lazy"
+                                    >
+
+                                    <div class="min-w-0">
+                                        <p class="truncate text-sm font-bold text-blue-950">
+                                            ${escapeHtml(product.name)}
+                                        </p>
+
+                                        <p class="text-xs text-slate-500">
+                                            ${escapeHtml(product.category || "Product")}
+                                        </p>
+
+                                        <p class="mt-1 text-xs font-bold text-blue-700">
+                                            ${formatCurrency(product.price)}
+                                        </p>
+                                    </div>
+                                </a>
+                            `;
+
+                        }).join("")}
+
+                    </div>
+
+                </div>
+            `;
+
+        }
+
+
+        // ========================================
+        // PRODUCT ERROR STATES
+        // ========================================
+
+        function showProductErrorStates() {
+
+            featuredLoading.classList.add("hidden");
+            latestLoading.classList.add("hidden");
+
+            featuredProducts.classList.add("hidden");
+            latestProducts.classList.add("hidden");
+
+            featuredEmpty.classList.remove("hidden");
+            latestEmpty.classList.remove("hidden");
+
+            featuredEmpty.innerHTML = `
+                <i class="bi bi-exclamation-circle text-4xl text-red-300"></i>
+                <p class="mt-3 font-semibold text-slate-700">
+                    Unable to load products right now.
+                </p>
+                <button
+                    type="button"
+                    id="retryProductsBtn"
+                    class="mt-4 rounded-xl bg-blue-900 px-5 py-2.5 text-sm font-bold text-white hover:bg-blue-800"
+                >
+                    Try Again
+                </button>
+            `;
+
+            latestEmpty.innerHTML = `
+                <i class="bi bi-exclamation-circle text-4xl text-red-300"></i>
+                <p class="mt-3 font-semibold text-slate-700">
+                    Please try again later.
+                </p>
+            `;
+
+
+            document
+                .getElementById(
+                    "retryProductsBtn"
+                )
+                ?.addEventListener(
+                    "click",
+                    loadProducts
+                );
+
+        }
+
+
+        // ========================================
+        // SWIPER
+        // ========================================
+
+        const heroSwiper =
+            new Swiper(
+                ".heroSwiper",
+                {
+                    loop: true,
+
+                    speed: 650,
+
+                    autoplay: {
+                        delay: 4500,
+                        disableOnInteraction: false
+                    },
+
+                    pagination: {
+                        el: ".swiper-pagination",
+                        clickable: true
+                    },
+
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev"
+                    },
+
+                    keyboard: {
+                        enabled: true
+                    },
+
+                    a11y: {
+                        enabled: true
+                    }
+                }
+            );
+
+
+        // ========================================
+        // AOS
+        // ========================================
+
+        if (window.AOS) {
+
+            AOS.init({
+                duration: 650,
+                easing: "ease-out-cubic",
+                once: true,
+                offset: 60
+            });
+
+        }
+
+
+        // ========================================
+        // INITIALIZE HOME PAGE
+        // ========================================
+
+        document.getElementById(
+            "currentYear"
+        ).textContent =
+            new Date().getFullYear();
+
+
+        loadProducts();
+
     </script>
 
 </body>
-
 </html>
