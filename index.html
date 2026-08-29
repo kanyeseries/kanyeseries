@@ -1602,9 +1602,27 @@
         }
 
 
+        function getRemainingStock(product) {
+
+            const baseStock = Number(product?.stock ?? 0);
+
+            if (!Number.isFinite(baseStock)) {
+                return null;
+            }
+
+            const cartQuantity = Number(
+                cartItems[getProductId(product)]?.quantity || 0
+            );
+
+            return Math.max(0, baseStock - cartQuantity);
+        }
+
+
         function isProductAvailable(product) {
 
-            return Number(product.stock ?? 0) > 0;
+            const remainingStock = getRemainingStock(product);
+
+            return remainingStock === null ? true : remainingStock > 0;
         }
 
 
@@ -1726,6 +1744,8 @@
 
                 attachWishlistListener(uid);
                 updateCartCount();
+                renderFeaturedProducts();
+                renderLatestProducts();
 
             } catch (error) {
 
@@ -1968,13 +1988,27 @@
             const price =
                 formatCurrency(product.price);
 
-            const stock =
-                Number(product.stock || 0);
+            const remainingStock =
+                getRemainingStock(product);
 
             const isWishlisted =
                 Boolean(
                     wishlistItems[productId]
                 );
+
+            const stockLabel =
+                remainingStock === null
+                    ? "In stock"
+                    : remainingStock <= 0
+                        ? "Out of stock"
+                        : remainingStock <= 5
+                            ? `Only ${remainingStock} left`
+                            : `${remainingStock} in stock`;
+
+            const stockClass =
+                remainingStock === null || remainingStock > 0
+                    ? "text-emerald-600"
+                    : "text-red-500";
 
 
             return `
@@ -2058,16 +2092,8 @@
                                 ${price}
                             </p>
 
-                            <p class="mt-1 text-[11px] ${
-                                stock > 0
-                                    ? "text-emerald-600"
-                                    : "text-red-500"
-                            }">
-                                ${
-                                    stock > 0
-                                        ? `${stock} in stock`
-                                        : "Out of stock"
-                                }
+                            <p class="mt-1 text-[11px] ${stockClass}">
+                                ${stockLabel}
                             </p>
 
                         </div>
@@ -2079,7 +2105,7 @@
                                 type="button"
                                 class="cart-action focus-ring flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-blue-900 px-2 py-2.5 text-xs font-bold text-white hover:bg-blue-800 disabled:cursor-not-allowed disabled:bg-slate-300"
                                 data-product-id="${escapeHtml(productId)}"
-                                ${stock <= 0 ? "disabled" : ""}
+                                ${remainingStock !== null && remainingStock <= 0 ? "disabled" : ""}
                                 aria-label="Add ${name} to cart"
                             >
                                 <i class="bi bi-cart-plus"></i>
@@ -2242,6 +2268,17 @@
                         existing?.quantity || 0
                     );
 
+                const availableStock = getRemainingStock(product);
+
+                if (availableStock !== null && availableStock <= 0) {
+                    showMessage(
+                        "Out of stock",
+                        "This product is currently unavailable.",
+                        "warning"
+                    );
+                    return;
+                }
+
                 const cartItem = {
 
                     productId,
@@ -2283,6 +2320,8 @@
 
 
                 updateCartCount();
+                renderFeaturedProducts();
+                renderLatestProducts();
 
 
                 showMessage(

@@ -685,15 +685,19 @@
                 setCount(cartCount, 0);
                 setCount(wishlistCount, 0);
 
-                profileLink.href = "login.html";
-                profileLink.setAttribute("aria-label", "Login");
+                if (profileLink) {
+                    profileLink.href = "login.html";
+                    profileLink.setAttribute("aria-label", "Login");
+                }
 
                 showState("login");
                 return;
             }
 
-            //profileLink.href = "profile.html";
-           // profileLink.setAttribute("aria-label", "Profile");
+            if (profileLink) {
+                profileLink.href = "profile.html";
+                profileLink.setAttribute("aria-label", "Profile");
+            }
 
             showState("loading");
 
@@ -870,7 +874,10 @@
             );
 
             const stock = getStock(product);
-            const available = stock === null ? true : stock > 0;
+            const remainingStock = Number.isFinite(stock)
+                ? Math.max(0, stock - quantity)
+                : null;
+            const available = remainingStock === null ? true : remainingStock > 0;
             const maxReached =
                 Number.isFinite(stock) && quantity >= stock;
 
@@ -908,7 +915,7 @@
                               <i class="bi bi-check-circle mr-1"></i>
                               ${
                                   Number.isFinite(stock)
-                                      ? `${stock} available`
+                                      ? `${remainingStock} available`
                                       : "In stock"
                               }
                            </p>`
@@ -1154,38 +1161,14 @@
             }
 
             const itemRef = ref(db, `carts/${currentUser.uid}/${id}`);
-            const stockRef = ref(db, `products/${id}/stock`);
-            const reservedQuantity = Math.max(0, Number(item.stockReserved) || 0);
-            const reservationChange = action === "increase" ? 1 : -1;
 
             try {
-                if (reservationChange > 0) {
-                    const stockResult = await runTransaction(stockRef, stock => {
-                        if (stock === null || !Number.isFinite(Number(stock))) return stock;
-                        if (Number(stock) <= 0) return;
-                        return Number(stock) - 1;
-                    });
-                    if (!stockResult.committed) {
-                        await showAlert("Stock limit reached", "This product is currently out of stock.", "info");
-                        return;
-                    }
-                } else if (reservedQuantity > 0) {
-                    await runTransaction(stockRef, stock => Number.isFinite(Number(stock)) ? Number(stock) + 1 : stock);
-                }
-
                 await update(itemRef, {
                     quantity: nextQuantity,
-                    stockReserved: Math.max(0, reservedQuantity + reservationChange)
+                    stockReserved: Math.max(0, Number(item.stockReserved) || 0)
                 });
             } catch (error) {
                 console.error("Quantity update error:", error);
-
-                if (reservationChange > 0) {
-                    await runTransaction(stockRef, stock => Number.isFinite(Number(stock)) ? Number(stock) + 1 : stock);
-                } else if (reservedQuantity > 0) {
-                    await runTransaction(stockRef, stock => Number.isFinite(Number(stock)) && Number(stock) > 0 ? Number(stock) - 1 : stock);
-                }
-
                 await showAlert(
                     "Unable to update quantity",
                     "Please try again.",
@@ -1204,8 +1187,6 @@
             }
 
             const id = String(productId);
-            const item = cartItems[id];
-            const reservedQuantity = Math.max(0, Number(item?.stockReserved) || 0);
 
             if (button) button.disabled = true;
 
@@ -1213,10 +1194,6 @@
                 await remove(
                     ref(db, `carts/${currentUser.uid}/${id}`)
                 );
-
-                if (reservedQuantity > 0) {
-                    await runTransaction(ref(db, `products/${id}/stock`), stock => Number.isFinite(Number(stock)) ? Number(stock) + reservedQuantity : stock);
-                }
 
                 await showAlert(
                     "Removed from cart",
@@ -1226,13 +1203,13 @@
             } catch (error) {
                 console.error("Remove cart item error:", error);
 
-                if (button) button.disabled = false;
-
                 await showAlert(
                     "Could not remove product",
                     "Please try again.",
                     "error"
                 );
+            } finally {
+                if (button) button.disabled = false;
             }
         }
 
@@ -1262,7 +1239,6 @@
                 (typeof item?.image === "string" ? item.image : "");
 
             const price = Number(product?.price ?? item?.price) || 0;
-            const reservedQuantity = Math.max(0, Number(item.stockReserved) || 0);
 
             if (button) button.disabled = true;
 
@@ -1282,10 +1258,6 @@
                     ref(db, `carts/${currentUser.uid}/${id}`)
                 );
 
-                if (reservedQuantity > 0) {
-                    await runTransaction(ref(db, `products/${id}/stock`), stock => Number.isFinite(Number(stock)) ? Number(stock) + reservedQuantity : stock);
-                }
-
                 await showAlert(
                     "Moved to wishlist",
                     "The product has been saved to your wishlist.",
@@ -1294,13 +1266,13 @@
             } catch (error) {
                 console.error("Move to wishlist error:", error);
 
-                if (button) button.disabled = false;
-
                 await showAlert(
                     "Could not move product",
                     "Please try again.",
                     "error"
                 );
+            } finally {
+                if (button) button.disabled = false;
             }
         }
 

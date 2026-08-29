@@ -1091,23 +1091,9 @@ async function addToCart(
             currentQuantity + 1;
 
 
-        const stockRef = ref(db, `products/${productKey}/stock`);
-        const stockResult = await runTransaction(stockRef, currentStock => {
-            if (currentStock === null || !Number.isFinite(Number(currentStock))) return currentStock;
-            if (Number(currentStock) <= 0) return;
-            return Number(currentStock) - 1;
-        });
-
-        if (!stockResult.committed) {
-            await Swal.fire({ icon: "info", title: "Stock limit reached", text: "This product is currently out of stock.", confirmButtonColor: "#1d4ed8" });
-            return;
-        }
-
-
-        try {
-            await set(
-                itemRef,
-                {
+        await set(
+            itemRef,
+            {
                 productId: String(productKey),
                 name: product.name || "Unnamed product",
                 price: Number(product.price) || 0,
@@ -1115,12 +1101,8 @@ async function addToCart(
                 quantity: nextQuantity,
                 stockReserved: Math.max(0, Number(existing.stockReserved) || 0) + 1,
                 addedAt: existing.addedAt || Date.now()
-                }
-            );
-        } catch (error) {
-            await runTransaction(stockRef, currentStock => Number.isFinite(Number(currentStock)) ? Number(currentStock) + 1 : currentStock);
-            throw error;
-        }
+            }
+        );
 
 
         await Swal.fire({
