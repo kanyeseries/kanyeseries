@@ -125,13 +125,13 @@ html {
   <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
 
     <!-- Logo -->
-    <a href="index.html"
-       class="flex items-center gap-2 font-black text-blue-950"
-       aria-label="Kanye Series Home">
-      <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-900 text-white">
-        <i class="bi bi-bag-heart-fill"></i>
+        <a href="index.html"
+             class="flex min-w-0 items-center gap-2 font-black text-blue-950"
+             aria-label="Kanye Series home">
+            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-900 text-white">
+                <img src="./images/logo2.png" alt="">
       </span>
-      <span>KANYE SERIES</span>
+            <span class="truncate text-base tracking-tight">KANYE SERIES</span>
     </a>
 
     <!-- Top Navigation -->
@@ -643,6 +643,9 @@ let images = [];
 let currentImageIndex = 0;
 let wishlistUnsubscribe = null;
 let cartUnsubscribe = null;
+let stockUnsubscribe = null;
+let productCartUnsubscribe = null;
+let productCartQuantity = 0;
 
 /* =========================================
    NAVIGATION COUNTS
@@ -660,7 +663,7 @@ function updateCount(element, count) {
 
   count = Math.max(0, Number(count) || 0);
 
-  element.textContent = count;
+    element.textContent = count > 99 ? "99+" : count;
 
   if (count > 0) {
     element.classList.remove("hidden");
@@ -1225,6 +1228,58 @@ function escapeHTML(value) {
    RENDER PRODUCT
 ===================================================== */
 
+function updateStockDisplay() {
+
+    if (!item) {
+        return;
+    }
+
+
+    const stock =
+        Number(item.stock);
+
+
+    const remainingStock =
+        Number.isFinite(stock)
+            ? Math.max(0, stock - productCartQuantity)
+            : null;
+
+
+    const available =
+        Number.isFinite(remainingStock)
+            ? remainingStock > 0
+            : true;
+
+
+    $("stock").textContent =
+        Number.isFinite(remainingStock)
+            ? available
+                ? `${remainingStock} available`
+                : "Out of stock"
+            : "Availability varies";
+
+
+    $("stock").className =
+        `mt-3 text-sm font-bold ${
+            available
+                ? "text-emerald-700"
+                : "text-red-600"
+        }`;
+
+
+    $("cartButton").disabled =
+        !available;
+
+
+    $("cartButton").innerHTML =
+        available
+
+            ? `<i class="bi bi-cart-plus mr-2"></i>Add to cart`
+
+            : `<i class="bi bi-x-circle mr-2"></i>Out of stock`;
+
+}
+
 function render() {
 
     $("loading")
@@ -1300,51 +1355,12 @@ function render() {
         money(item.price);
 
 
-    const stock =
-        Number(item.stock);
-
-
-    const available =
-        Number.isFinite(stock)
-            ? stock > 0
-            : true;
-
-
-    $("stock").textContent =
-        Number.isFinite(stock)
-            ? available
-                ? `${stock} in stock`
-                : "Out of stock"
-            : "Availability varies";
-
-
-    $("stock").className =
-        `mt-3 text-sm font-bold ${
-            available
-                ? "text-emerald-700"
-                : "text-red-600"
-        }`;
+    updateStockDisplay();
 
 
     $("description").textContent =
         item.description ||
         "No description has been provided for this product.";
-
-
-    /*
-       Cart button
-    */
-
-    $("cartButton").disabled =
-        !available;
-
-
-    $("cartButton").innerHTML =
-        available
-
-            ? `<i class="bi bi-cart-plus mr-2"></i>Add to cart`
-
-            : `<i class="bi bi-x-circle mr-2"></i>Out of stock`;
 
 
     /*
@@ -1400,6 +1416,18 @@ function updateWishlistButton() {
 
 async function load() {
 
+    if (stockUnsubscribe) {
+        stockUnsubscribe();
+        stockUnsubscribe = null;
+    }
+
+    if (productCartUnsubscribe) {
+        productCartUnsubscribe();
+        productCartUnsubscribe = null;
+    }
+
+    productCartQuantity = 0;
+
     if (!id) {
 
         render();
@@ -1443,6 +1471,67 @@ async function load() {
         } else {
 
             item = null;
+
+        }
+
+
+        if (item) {
+
+            stockUnsubscribe = onValue(
+                ref(db, `products/${id}/stock`),
+
+                stockSnapshot => {
+
+                    if (stockSnapshot.exists()) {
+                        item.stock = stockSnapshot.val();
+                    } else {
+                        delete item.stock;
+                    }
+
+                    updateStockDisplay();
+
+                },
+
+                error => {
+
+                    console.error(
+                        "Product stock error:",
+                        error
+                    );
+
+                }
+            );
+
+            if (user) {
+
+                productCartUnsubscribe = onValue(
+                    ref(db, `carts/${user.uid}`),
+
+                    cartSnapshot => {
+
+                        const cartItems = cartSnapshot.val() || {};
+                        const cartItem = cartItems[id] || {};
+
+                        productCartQuantity = Math.max(
+                            0,
+                            Math.floor(Number(cartItem.quantity) || 0)
+                        );
+
+                        updateStockDisplay();
+
+                    },
+
+                    error => {
+
+                        console.error(
+                            "Product cart quantity error:",
+                            error
+                        );
+
+                    }
+                );
+
+            }
 
         }
 
@@ -1550,6 +1639,21 @@ $("cartButton")
                     "Out of stock",
                     "This product is currently unavailable.",
                     "warning"
+                );
+
+                return;
+            }
+
+
+            if (
+                Number.isFinite(stock) &&
+                productCartQuantity + 1 > stock
+            ) {
+
+                message(
+                    "Stock limit reached",
+                    `Only ${stock} item${stock === 1 ? "" : "s"} available.`,
+                    "info"
                 );
 
                 return;
