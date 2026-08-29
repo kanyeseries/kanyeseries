@@ -1282,6 +1282,7 @@ const uploadPreset =
 let currentUser = null;
 
 let currentProfile = null;
+let ordersListenerCleanup = null;
 
 
 /* =========================================================
@@ -1445,6 +1446,11 @@ onAuthStateChanged(
 
     currentUser = user || null;
 
+    if(ordersListenerCleanup){
+      ordersListenerCleanup();
+      ordersListenerCleanup = null;
+    }
+
     ordersCount.textContent = "0";
 
     cartSummary.textContent = "0";
@@ -1470,7 +1476,7 @@ onAuthStateChanged(
 
       await loadProfile(user.uid);
 
-      await loadOrders(user.uid);
+      startOrdersListener(user.uid);
 
       startCartListener(user.uid);
 
@@ -2172,47 +2178,44 @@ function startWishlistListener(uid){
    LOAD ORDERS
 ========================================================= */
 
-async function loadOrders(uid){
+function startOrdersListener(uid){
 
-  try{
+  if(ordersListenerCleanup){
+    ordersListenerCleanup();
+    ordersListenerCleanup = null;
+  }
 
-    const snapshot =
-      await get(
-        ref(db, "orders")
+  ordersListenerCleanup = onValue(
+    ref(db, `orders/${uid}`),
+
+    snapshot => {
+
+      const data =
+        snapshot.val() || {};
+
+
+      const total =
+        Object.keys(data).length;
+
+
+      ordersCount.textContent =
+        total > 99
+          ? "99+"
+          : String(total);
+
+    },
+
+    error => {
+
+      console.error(
+        "Orders summary listener error:",
+        error
       );
 
+      ordersCount.textContent = "0";
 
-    const data =
-      snapshot.val() || {};
-
-
-    const mine =
-      Object.values(data)
-        .filter(
-          order =>
-            text(
-              order?.userId,
-              ""
-            ) === uid
-        );
-
-
-    ordersCount.textContent =
-      mine.length > 99
-        ? "99+"
-        : String(mine.length);
-
-
-  }catch(error){
-
-    console.error(
-      "Orders summary error:",
-      error
-    );
-
-    ordersCount.textContent = "0";
-
-  }
+    }
+  );
 
 }
 
@@ -2406,7 +2409,7 @@ retryBtn.onclick =
         currentUser.uid
       );
 
-      await loadOrders(
+      startOrdersListener(
         currentUser.uid
       );
 
