@@ -32,13 +32,11 @@ body{background:#f8fafc;color:#0f172a}
 <a href="admin-orders.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-bag-check"></i><span>Orders</span></a>
 <a href="admin-users.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-people"></i><span>Users</span></a>
 <a href="admin-special-orders.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-clipboard-check"></i><span>Special Orders</span></a>
-<a href="admin-wishlist.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-heart"></i><span>Wishlist</span></a>
-<a href="admin-cart.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-cart3"></i><span>Cart</span></a>
 <a href="admin-sales.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-graph-up-arrow"></i><span>Sales</span></a>
   </nav>
   <div class="border-t border-blue-900 p-4">
     <a href="admin-profile.html" class="nav-link flex items-center gap-3 rounded-xl px-4 py-3 font-semibold"><i class="bi bi-person-circle"></i><span>Admin Profile</span></a>
-    <button data-signout class="nav-link mt-1 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left font-semibold focus-ring"><i class="bi bi-box-arrow-right"></i><span>Sign Out</span></button>
+    <button type="button" data-signout class="nav-link mt-1 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left font-semibold focus-ring"><i class="bi bi-box-arrow-right"></i><span>Sign Out</span></button>
   </div>
 </aside>
 
@@ -46,7 +44,7 @@ body{background:#f8fafc;color:#0f172a}
 <aside id="drawer" class="drawer fixed inset-y-0 left-0 z-50 w-72 bg-blue-950 text-white lg:hidden">
   <div class="flex h-20 items-center justify-between border-b border-blue-900 px-5">
     <div class="flex items-center gap-2 font-black"><img src="./images/logo2.png" alt="Kanye Series" class="h-8 w-8 object-contain">KANYE SERIES</div>
-    <button id="closeMenu" aria-label="Close menu" class="focus-ring rounded-lg p-2"><i class="bi bi-x-lg"></i></button>
+    <button type="button" id="closeMenu" aria-label="Close menu" class="focus-ring rounded-lg p-2"><i class="bi bi-x-lg"></i></button>
   </div>
   <nav class="space-y-1 p-4" aria-label="Mobile admin navigation">
 <a href="admin-index.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a>
@@ -54,8 +52,6 @@ body{background:#f8fafc;color:#0f172a}
 <a href="admin-orders.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-bag-check"></i><span>Orders</span></a>
 <a href="admin-users.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-people"></i><span>Users</span></a>
 <a href="admin-special-orders.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-clipboard-check"></i><span>Special Orders</span></a>
-<a href="admin-wishlist.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-heart"></i><span>Wishlist</span></a>
-<a href="admin-cart.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-cart3"></i><span>Cart</span></a>
 <a href="admin-sales.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-graph-up-arrow"></i><span>Sales</span></a>
   </nav>
 </aside>
@@ -63,7 +59,7 @@ body{background:#f8fafc;color:#0f172a}
 <header class="sticky top-0 z-30 border-b bg-white/95 backdrop-blur lg:ml-72">
   <div class="flex h-20 items-center justify-between px-4 sm:px-6">
     <div class="flex items-center gap-3">
-      <button id="openMenu" class="rounded-xl border px-3 py-2 lg:hidden focus-ring" aria-label="Open navigation"><i class="bi bi-list text-xl"></i></button>
+      <button type="button" id="openMenu" aria-label="Open navigation" class="rounded-xl border px-3 py-2 lg:hidden focus-ring"><i class="bi bi-list text-xl"></i></button>
       <div>
         <p class="text-xs font-bold uppercase tracking-widest text-blue-700">Kanye Series</p>
         <h1 class="text-xl font-black sm:text-2xl">Products</h1>
@@ -72,7 +68,7 @@ body{background:#f8fafc;color:#0f172a}
     <div class="flex items-center gap-3">
       <div class="hidden text-right sm:block"><div data-admin-name class="font-bold">Admin</div><div class="text-xs text-slate-500">Administrator</div></div>
       <a href="admin-profile.html" class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-blue-50 text-blue-800 focus-ring" aria-label="Admin profile"><img data-admin-avatar class="hidden h-full w-full object-cover" alt="Administrator avatar"><i data-avatar-icon class="bi bi-person-fill"></i></a>
-      <button data-signout class="flex h-10 w-10 items-center justify-center rounded-xl border bg-white focus-ring" aria-label="Sign out"><i class="bi bi-box-arrow-right"></i></button>
+      <button type="button" data-signout aria-label="Sign out" class="flex h-10 w-10 items-center justify-center rounded-xl border bg-white focus-ring"><i class="bi bi-box-arrow-right"></i></button>
     </div>
   </div>
 </header>
@@ -92,13 +88,13 @@ body{background:#f8fafc;color:#0f172a}
 
 <script type="module">
 const firebaseConfig = {
-  apiKey: "AIzaSyBx-4BgpCY5OuKRzifPv2xQBtQ8w323wis",
-  authDomain: "kanyeseries-d511b.firebaseapp.com",
-  projectId: "kanyeseries-d511b",
-  storageBucket: "kanyeseries-d511b.firebasestorage.app",
-  messagingSenderId: "212048886528",
-  appId: "1:212048886528:web:235f96016a4de83ec991e5",
-  measurementId: "G-7LS8NYFX7Y"
+  apiKey: "AIzaSyBK-HHFid2F9SY1rtGsSO3boUFZihyOpTQ",
+  authDomain: "goldai-58550.firebaseapp.com",
+  projectId: "goldai-58550",databaseURL:"https://goldai-58550-default-rtdb.firebaseio.com",
+  storageBucket: "goldai-58550.firebasestorage.app",
+  messagingSenderId: "726592521265",
+  appId: "1:726592521265:web:8aca7282b6b4aec8c9c110",
+  measurementId: "G-23MEZJVM6Z"
 };
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
@@ -168,8 +164,8 @@ const renderProducts=()=>{
  productList.innerHTML=arr.map(p=>`
  <div class="flex flex-col gap-4 border-b p-4 sm:flex-row sm:items-center">
   <img src="${productImage(p)}" onerror="this.style.display='none'" alt="" class="h-16 w-16 rounded-xl bg-slate-100 object-cover">
-  <div class="min-w-0 flex-1"><b class="block truncate">${p.name||"Unnamed product"}</b><p class="text-sm text-slate-500">${p.category||"—"} · UGX ${new Intl.NumberFormat("en-UG").format(Number(p.price)||0)}</p><p class="text-xs text-slate-400">Stock: ${p.stock??0}</p></div>
-  <div class="flex gap-2"><a href="admin-edit-product.html?id=${encodeURIComponent(p.id||p._key)}" class="rounded-lg border px-3 py-2 font-semibold">Edit</a><button data-delete="${p.id||p._key}" class="rounded-lg bg-red-50 px-3 py-2 font-semibold text-red-700">Delete</button></div>
+  <div class="min-w-0 flex-1"><b class="block truncate">${p.name||"Unnamed product"}</b><p class="text-sm text-slate-500">${p.category||"-"} - UGX ${new Intl.NumberFormat("en-UG").format(Number(p.price)||0)}</p><p class="text-xs text-slate-400">Stock: ${p.stock??0}</p></div>
+  <div class="flex gap-2"><a href="admin-edit-product.html?id=${encodeURIComponent(p.id||p._key)}" class="rounded-lg border px-3 py-2 font-semibold">Edit</a><button type="button" data-delete="${p.id||p._key}" class="rounded-lg bg-red-50 px-3 py-2 font-semibold text-red-700">Delete</button></div>
  </div>`).join("") || `<div class="p-6 text-center text-slate-500">No products found.</div>`;
  document.querySelectorAll("[data-delete]").forEach(btn=>btn.addEventListener("click",async()=>{
    const ok=await Swal.fire({icon:"warning",title:"Delete product?",text:"This cannot be undone.",showCancelButton:true,confirmButtonText:"Delete",confirmButtonColor:"#dc2626"});

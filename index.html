@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Kanye Series — Premium Shoes, Electronics & Books</title>
+    <title>Kanye Series - Premium Shoes, Electronics &amp; Books</title>
     <meta
         name="description"
         content="Discover premium shoes, electronics, secondary science books and special orders at Kanye Series."
@@ -64,8 +64,8 @@
 
         .glass {
             background: rgba(255, 255, 255, 0.94);
-            backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
         }
 
         .hero-overlay {
@@ -1344,7 +1344,7 @@
                     <div class="flex flex-col gap-4 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
 
                         <p>
-                            © <span id="currentYear"></span> Kanye Series. All rights reserved.
+                            &copy; <span id="currentYear"></span> Kanye Series. All rights reserved.
                         </p>
 
                         <p>
@@ -1356,7 +1356,7 @@
                 </div>
 
             </div>
-        </footer>
+         <a href="policy.html" class="focus-ring hover:text-white font-semibold">Policies</a> </footer>
 
     </main>
 
@@ -1432,13 +1432,13 @@
         // ========================================
 
         const firebaseConfig = {
-            apiKey: "AIzaSyBx-4BgpCY5OuKRzifPv2xQBtQ8w323wis",
-            authDomain: "kanyeseries-d511b.firebaseapp.com",
-            projectId: "kanyeseries-d511b",
-            storageBucket: "kanyeseries-d511b.firebasestorage.app",
-            messagingSenderId: "212048886528",
-            appId: "1:212048886528:web:235f96016a4de83ec991e5",
-            measurementId: "G-7LS8NYFX7Y"
+            apiKey: "AIzaSyBK-HHFid2F9SY1rtGsSO3boUFZihyOpTQ",
+            authDomain: "goldai-58550.firebaseapp.com",
+            projectId: "goldai-58550",databaseURL:"https://goldai-58550-default-rtdb.firebaseio.com",
+            storageBucket: "goldai-58550.firebasestorage.app",
+            messagingSenderId: "726592521265",
+            appId: "1:726592521265:web:8aca7282b6b4aec8c9c110",
+            measurementId: "G-23MEZJVM6Z"
         };
 
 
@@ -2050,7 +2050,7 @@
                             type="button"
                             class="wishlist-action focus-ring absolute right-2 top-2 flex h-9 w-9 items-center justify-center rounded-full ${
                                 isWishlisted
-                                    ? "bg-red-500 text-white"
+                                    ? ">bg-red-500 text-white"
                                     : "bg-white/90 text-slate-700"
                             } shadow-md backdrop-blur-sm hover:scale-105"
                             data-product-id="${escapeHtml(productId)}"
@@ -2103,11 +2103,10 @@
 
                             <button
                                 type="button"
-                                class="cart-action focus-ring flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-blue-900 px-2 py-2.5 text-xs font-bold text-white hover:bg-blue-800 disabled:cursor-not-allowed disabled:bg-slate-300"
                                 data-product-id="${escapeHtml(productId)}"
                                 ${remainingStock !== null && remainingStock <= 0 ? "disabled" : ""}
                                 aria-label="Add ${name} to cart"
-                            >
+                                class="cart-action focus-ring flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-blue-900 px-2 py-2.5 text-xs font-bold text-white hover:bg-blue-800 disabled:cursor-not-allowed disabled:bg-slate-300">
                                 <i class="bi bi-cart-plus"></i>
                                 <span>Add</span>
                             </button>
@@ -2295,9 +2294,6 @@
 
                     quantity:
                         currentQuantity + 1,
-
-                    stockReserved:
-                        Math.max(0, Number(existing?.stockReserved) || 0) + 1,
 
                     addedAt:
                         existing?.addedAt ||
@@ -2784,7 +2780,7 @@
                 <button
                     type="button"
                     id="retryProductsBtn"
-                    class="mt-4 rounded-xl bg-blue-900 px-5 py-2.5 text-sm font-bold text-white hover:bg-blue-800"
+                    class="mt-4 rounded-xl bg-blue-900 px-5 py-2.5 text-sm font-bold text-white hover:bg-blue-800">
                 >
                     Try Again
                 </button>

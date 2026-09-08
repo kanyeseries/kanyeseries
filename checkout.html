@@ -150,13 +150,13 @@
     import { getDatabase, ref, get, push, set, remove, onValue } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
 
     const firebaseConfig = {
-        apiKey: "AIzaSyBx-4BgpCY5OuKRzifPv2xQBtQ8w323wis",
-        authDomain: "kanyeseries-d511b.firebaseapp.com",
-        projectId: "kanyeseries-d511b",
-        storageBucket: "kanyeseries-d511b.firebasestorage.app",
-        messagingSenderId: "212048886528",
-        appId: "1:212048886528:web:235f96016a4de83ec991e5",
-        measurementId: "G-7LS8NYFX7Y"
+        apiKey: "AIzaSyBK-HHFid2F9SY1rtGsSO3boUFZihyOpTQ",
+        authDomain: "goldai-58550.firebaseapp.com",
+        projectId: "goldai-58550",databaseURL:"https://goldai-58550-default-rtdb.firebaseio.com",
+        storageBucket: "goldai-58550.firebasestorage.app",
+        messagingSenderId: "726592521265",
+        appId: "1:726592521265:web:8aca7282b6b4aec8c9c110",
+        measurementId: "G-23MEZJVM6Z"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -231,7 +231,7 @@
             totalQuantity += quantity;
             const name = escapeHTML(item.name || "Unnamed product");
             const image = getImage(item);
-            return `<div class="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-3"><div class="product-thumb h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-slate-200">${image ? `<img src="${escapeHTML(image)}" alt="${name}" class="h-full w-full object-cover">` : `<div class="flex h-full w-full items-center justify-center text-slate-400"><i class="bi bi-image text-xl"></i></div>`}</div><div class="min-w-0 flex-1"><p class="line-clamp-2 text-sm font-bold text-slate-900">${name}</p><p class="mt-1 text-xs font-semibold text-slate-500">Qty: ${quantity} · ${money(price)}</p></div><p class="shrink-0 text-xs font-black text-blue-800">${money(lineTotal)}</p></div>`;
+            return `<div class="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-3"><div class="product-thumb h-14 w-14 shrink-0 overflow-hidden rounded-xl bg-slate-200">${image ? `<img src="${escapeHTML(image)}" alt="${name}" class="h-full w-full object-cover">` : `<div class="flex h-full w-full items-center justify-center text-slate-400"><i class="bi bi-image text-xl"></i></div>`}</div><div class="min-w-0 flex-1"><p class="line-clamp-2 text-sm font-bold text-slate-900">${name}</p><p class="mt-1 text-xs font-semibold text-slate-500">Qty: ${quantity} Â· ${money(price)}</p></div><p class="shrink-0 text-xs font-black text-blue-800">${money(lineTotal)}</p></div>`;
         }).join("");
         $("summaryItems").textContent = String(totalQuantity);
         $("summarySubtotal").textContent = money(subtotal);
@@ -256,6 +256,10 @@
     async function placeOrder(event) {
         event.preventDefault();
         if (placeOrderBtn.disabled) return;
+        if (!navigator.onLine) {
+            await Swal.fire({ icon: "info", title: "You're offline", text: "Reconnect to continue checkout and place your order.", confirmButtonColor: "#1d4ed8" });
+            return;
+        }
         const name = $("fullName").value.trim();
         const phone = normalizeUgandaPhone($("phone").value);
         const paymentPhone = normalizeUgandaPhone($("paymentPhone").value);
@@ -267,12 +271,41 @@
         if (!address) return Swal.fire({ icon: "info", title: "Delivery address required", text: "Please enter your delivery address.", confirmButtonColor: "#1d4ed8" });
         const entries = Object.entries(cartItems).filter(([, item]) => Number(item?.quantity) > 0);
         if (!entries.length) return Swal.fire({ icon: "info", title: "Your cart is empty", text: "Add products to your cart before placing an order.", confirmButtonColor: "#1d4ed8" });
+
+        // Never trust cart-cached price/name/stock as the checkout source of truth.
+        const verifiedEntries = [];
+        for (const [id, item] of entries) {
+            const productSnapshot = await get(ref(db, `products/${id}`));
+            if (!productSnapshot.exists()) {
+                throw new Error(`PRODUCT_UNAVAILABLE:${id}`);
+            }
+            const product = productSnapshot.val() || {};
+            const quantity = Math.max(1, Math.floor(Number(item.quantity) || 1));
+            const stock = Number(product.stock);
+            if (Number.isFinite(stock) && quantity > stock) {
+                throw new Error(`INSUFFICIENT_STOCK:${product.name || id}:${stock}`);
+            }
+            const price = Number(product.price);
+            if (!Number.isFinite(price) || price < 0) {
+                throw new Error(`INVALID_PRODUCT_PRICE:${id}`);
+            }
+            verifiedEntries.push({
+                productId: id,
+                name: String(product.name || "Unnamed product"),
+                price,
+                image: getImage(product),
+                quantity
+            });
+        }
+
+        const verifiedSubtotal = verifiedEntries.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        subtotal = verifiedSubtotal;
         placeOrderBtn.disabled = true;
         $("placeOrderText").textContent = "Placing Order...";
         $("placeOrderIcon").className = "bi bi-arrow-repeat animate-spin";
         try {
             const orderRef = push(ref(db, `orders/${currentUser.uid}`));
-            const order = { orderId: orderRef.key, userId: currentUser.uid, customerName: name, customerPhone: phone, items: entries.map(([id, item]) => ({ productId: String(item.productId || id), name: item.name || "Unnamed product", price: Number(item.price) || 0, image: getImage(item), quantity: Math.max(1, Math.floor(Number(item.quantity) || 1)), stockReserved: Math.max(0, Math.floor(Number(item.stockReserved) || 0)) })), subtotal, total: subtotal, status: "pending", paymentStatus: "pending", stockRestored: false, paymentPhone, paymentReference: $("paymentReference").value.trim(), shippingAddress: { address, area, instructions: $("instructions").value.trim() }, createdAt: Date.now() };
+            const order = { orderId: orderRef.key, userId: currentUser.uid, customerName: name, customerPhone: phone, items: verifiedEntries, subtotal: verifiedSubtotal, total: verifiedSubtotal, status: "pending", paymentStatus: "pending", stockDeducted: false, stockRestored: false, paymentPhone, paymentReference: $("paymentReference").value.trim(), shippingAddress: { address, area, instructions: $("instructions").value.trim() }, createdAt: Date.now() };
             await set(orderRef, order);
             try {
                 await remove(ref(db, `carts/${currentUser.uid}`));
@@ -285,9 +318,14 @@
             showOnly($("successState"));
         } catch (error) {
             console.error("Order creation error:", error);
-            const message = error?.code === "PERMISSION_DENIED"
-                ? "Firebase security rules do not allow this account to create orders. Update the Realtime Database rules for orders/{uid}."
-                : "Something went wrong while placing your order. Please check your connection and try again.";
+            const raw = String(error?.message || "");
+            const message = raw.startsWith("PRODUCT_UNAVAILABLE:")
+                ? "One of the products in your cart is no longer available."
+                : raw.startsWith("INSUFFICIENT_STOCK:")
+                    ? `Not enough stock is available for ${raw.split(":")[1] || "one of your products"}.`
+                    : error?.code === "PERMISSION_DENIED"
+                        ? "Your account is not allowed to create this order. Please check your account and try again."
+                        : "Something went wrong while placing your order. Please check your connection and try again.";
             await Swal.fire({ icon: "error", title: "Could not place order", text: message, confirmButtonColor: "#1d4ed8" });
             placeOrderBtn.disabled = false;
             $("placeOrderText").textContent = "Place Order";
@@ -309,5 +347,25 @@
         startCountListeners(user.uid);
     });
 </script>
+<footer class="mt-10 bg-blue-950 text-slate-300">
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <div class="flex items-center gap-2 text-white"><span class="flex h-9 w-9 items-center justify-center rounded-lg bg-white"><img src="./images/logo2.png" alt="" class="h-7 w-7 object-contain"></span><span class="font-black tracking-tight">KANYE SERIES</span></div>
+        <p class="mt-2 text-xs text-blue-200">Shoes, electronics, books and special orders.</p>
+      </div>
+      <nav class="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold" aria-label="Footer navigation">
+        <a href="index.html" class="focus-ring hover:text-white">Home</a>
+        <a href="products.html" class="focus-ring hover:text-white">Products</a>
+        <a href="orders.html" class="focus-ring hover:text-white">Orders</a>
+        <a href="special-orders.html" class="focus-ring hover:text-white">Special Orders</a>
+        <a href="policy.html" class="focus-ring hover:text-white">Policies</a>
+      </nav>
+    </div>
+    <div class="mt-6 border-t border-blue-900 pt-5 text-xs text-blue-300">Â© <span data-footer-year></span> Kanye Series. All rights reserved.</div>
+  </div>
+</footer>
+<script>document.querySelectorAll("[data-footer-year]").forEach(el => el.textContent = new Date().getFullYear());</script>
+
 </body>
 </html>

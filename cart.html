@@ -516,13 +516,13 @@
         // FIREBASE CONFIGURATION
         // ========================================
         const firebaseConfig = {
-            apiKey: "AIzaSyBx-4BgpCY5OuKRzifPv2xQBtQ8w323wis",
-            authDomain: "kanyeseries-d511b.firebaseapp.com",
-            projectId: "kanyeseries-d511b",
-            storageBucket: "kanyeseries-d511b.firebasestorage.app",
-            messagingSenderId: "212048886528",
-            appId: "1:212048886528:web:235f96016a4de83ec991e5",
-            measurementId: "G-7LS8NYFX7Y"
+            apiKey: "AIzaSyBK-HHFid2F9SY1rtGsSO3boUFZihyOpTQ",
+            authDomain: "goldai-58550.firebaseapp.com",
+            projectId: "goldai-58550",databaseURL:"https://goldai-58550-default-rtdb.firebaseio.com",
+            storageBucket: "goldai-58550.firebasestorage.app",
+            messagingSenderId: "726592521265",
+            appId: "1:726592521265:web:8aca7282b6b4aec8c9c110",
+            measurementId: "G-23MEZJVM6Z"
         };
 
         // ========================================
@@ -970,13 +970,13 @@
                                     </a>
                                 </div>
 
-                                <button
-                                    type="button"
-                                    class="remove-cart-btn focus-ring flex h-9 w-9 shrink-0
-                                           items-center justify-center rounded-full text-slate-400
-                                           hover:bg-red-50 hover:text-red-600"
-                                    data-product-id="${safeId}"
-                                    aria-label="Remove ${safeName} from cart">
+                                    <button
+                                     type="button"
+                                     data-product-id="${safeId}"
+                                     aria-label="Remove ${safeName} from cart"
+                                     class="remove-cart-btn focus-ring flex h-9 w-9 shrink-0
+                                         items-center justify-center rounded-full text-slate-400
+                                         hover:bg-red-50 hover:text-red-600">
                                     <i class="bi bi-trash3"></i>
                                 </button>
                             </div>
@@ -1002,15 +1002,15 @@
                                     <div class="flex h-10 items-center overflow-hidden rounded-xl
                                                 border border-slate-200 bg-white">
 
-                                        <button
-                                            type="button"
-                                            class="quantity-btn focus-ring flex h-10 w-10 items-center
-                                                   justify-center text-slate-600 hover:bg-slate-50
-                                                   disabled:cursor-not-allowed disabled:opacity-40"
-                                            data-action="decrease"
-                                            data-product-id="${safeId}"
-                                            aria-label="Decrease quantity of ${safeName}"
-                                            ${quantity <= 1 ? "disabled" : ""}>
+                                             <button
+                                              type="button"
+                                              data-action="decrease"
+                                              data-product-id="${safeId}"
+                                              aria-label="Decrease quantity of ${safeName}"
+                                              ${quantity <= 1 ? "disabled" : ""}
+                                              class="quantity-btn focus-ring flex h-10 w-10 items-center
+                                                  justify-center text-slate-600 hover:bg-slate-50
+                                                  disabled:cursor-not-allowed disabled:opacity-40">
                                             <i class="bi bi-dash-lg"></i>
                                         </button>
 
@@ -1023,9 +1023,6 @@
 
                                         <button
                                             type="button"
-                                            class="quantity-btn focus-ring flex h-10 w-10 items-center
-                                                   justify-center text-slate-600 hover:bg-slate-50
-                                                   disabled:cursor-not-allowed disabled:opacity-40"
                                             data-action="increase"
                                             data-product-id="${safeId}"
                                             aria-label="Increase quantity of ${safeName}"
@@ -1033,7 +1030,10 @@
                                                 maxReached || !available
                                                     ? "disabled"
                                                     : ""
-                                            }>
+                                            }
+                                            class="quantity-btn focus-ring flex h-10 w-10 items-center
+                                                   justify-center text-slate-600 hover:bg-slate-50
+                                                   disabled:cursor-not-allowed disabled:opacity-40">
                                             <i class="bi bi-plus-lg"></i>
                                         </button>
                                     </div>
@@ -1060,13 +1060,13 @@
                                     <i class="bi bi-arrow-right"></i>
                                 </a>
 
-                                <button
-                                    type="button"
-                                    class="move-wishlist-btn focus-ring inline-flex min-h-9
-                                           items-center gap-1 rounded-lg px-2 py-1 text-xs
-                                           font-bold text-slate-600 hover:bg-red-50 hover:text-red-700"
-                                    data-product-id="${safeId}"
-                                    aria-label="Move ${safeName} to wishlist">
+                                    <button
+                                     type="button"
+                                     data-product-id="${safeId}"
+                                     aria-label="Move ${safeName} to wishlist"
+                                     class="move-wishlist-btn focus-ring inline-flex min-h-9
+                                         items-center gap-1 rounded-lg px-2 py-1 text-xs
+                                         font-bold text-slate-600 hover:bg-red-50 hover:text-red-700">
                                     <i class="bi bi-heart"></i>
                                     Move to Wishlist
                                 </button>
@@ -1164,9 +1164,7 @@
 
             try {
                 await update(itemRef, {
-                    quantity: nextQuantity,
-                    stockReserved: Math.max(0, Number(item.stockReserved) || 0)
-                });
+                    quantity: nextQuantity,});
             } catch (error) {
                 console.error("Quantity update error:", error);
                 await showAlert(
@@ -1465,5 +1463,25 @@
             });
         }
     </script>
+<footer class="mt-10 bg-blue-950 text-slate-300">
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <div class="flex items-center gap-2 text-white"><span class="flex h-9 w-9 items-center justify-center rounded-lg bg-white"><img src="./images/logo2.png" alt="" class="h-7 w-7 object-contain"></span><span class="font-black tracking-tight">KANYE SERIES</span></div>
+        <p class="mt-2 text-xs text-blue-200">Shoes, electronics, books and special orders.</p>
+      </div>
+      <nav class="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold" aria-label="Footer navigation">
+        <a href="index.html" class="focus-ring hover:text-white">Home</a>
+        <a href="products.html" class="focus-ring hover:text-white">Products</a>
+        <a href="orders.html" class="focus-ring hover:text-white">Orders</a>
+        <a href="special-orders.html" class="focus-ring hover:text-white">Special Orders</a>
+        <a href="policy.html" class="focus-ring hover:text-white">Policies</a>
+      </nav>
+    </div>
+    <div class="mt-6 border-t border-blue-900 pt-5 text-xs text-blue-300">&copy; <span data-footer-year></span> Kanye Series. All rights reserved.</div>
+  </div>
+</footer>
+<script>document.querySelectorAll("[data-footer-year]").forEach(el => el.textContent = new Date().getFullYear());</script>
+
 </body>
 </html>

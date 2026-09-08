@@ -94,8 +94,8 @@
 
         .line-clamp-2 {
             display: -webkit-box;
-            line-clamp: 2;
             -webkit-line-clamp: 2;
+            line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
@@ -121,6 +121,7 @@
 
         .search-panel {
             background: rgba(15,23,42,.58);
+            -webkit-backdrop-filter: blur(5px);
             backdrop-filter: blur(5px);
         }
 
@@ -264,19 +265,15 @@
                 <div class="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm sm:p-4">
 
                     <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-                        <div class="filter-scroll flex gap-2 overflow-x-auto pb-1" role="tablist" aria-label="Product categories">
-                            <button type="button" data-category="All"
-                                    class="category-btn shrink-0 rounded-xl bg-blue-800 px-4 py-2.5 text-xs font-bold text-white shadow-sm"
-                                    aria-selected="true">All</button>
-                            <button type="button" data-category="Shoes"
-                                    class="category-btn shrink-0 rounded-xl bg-slate-100 px-4 py-2.5 text-xs font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-800"
-                                    aria-selected="false">Shoes</button>
-                            <button type="button" data-category="Electronics"
-                                    class="category-btn shrink-0 rounded-xl bg-slate-100 px-4 py-2.5 text-xs font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-800"
-                                    aria-selected="false">Electronics</button>
-                            <button type="button" data-category="Books"
-                                    class="category-btn shrink-0 rounded-xl bg-slate-100 px-4 py-2.5 text-xs font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-800"
-                                    aria-selected="false">Books</button>
+                        <div class="filter-scroll flex gap-2 overflow-x-auto pb-1" aria-label="Product categories">
+                                <button type="button" data-category="All" aria-pressed="true"
+                                    class="category-btn shrink-0 rounded-xl bg-blue-800 px-4 py-2.5 text-xs font-bold text-white shadow-sm">All</button>
+                                <button type="button" data-category="Shoes" aria-pressed="false"
+                                    class="category-btn shrink-0 rounded-xl bg-slate-100 px-4 py-2.5 text-xs font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-800">Shoes</button>
+                                <button type="button" data-category="Electronics" aria-pressed="false"
+                                    class="category-btn shrink-0 rounded-xl bg-slate-100 px-4 py-2.5 text-xs font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-800">Electronics</button>
+                                <button type="button" data-category="Books" aria-pressed="false"
+                                    class="category-btn shrink-0 rounded-xl bg-slate-100 px-4 py-2.5 text-xs font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-800">Books</button>
                             <a href="special-orders.html"
                                class="inline-flex shrink-0 items-center justify-center rounded-xl bg-slate-100 px-4 py-2.5 text-xs font-bold text-slate-600 transition hover:bg-blue-50 hover:text-blue-800">
                                 Special Orders
@@ -406,7 +403,7 @@
                     <p>&copy; <span id="copyrightYear">2026</span> Kanye Series. All rights reserved.</p>
                 </div>
             </div>
-        </footer>
+         <a href="policy.html" class="focus-ring hover:text-white font-semibold">Policies</a> </footer>
     </div>
 
     <!-- MOBILE/TABLET BOTTOM NAVIGATION -->
@@ -464,13 +461,13 @@
         // FIREBASE CONFIGURATION
         // ========================================
         const firebaseConfig = {
-            apiKey: "AIzaSyBx-4BgpCY5OuKRzifPv2xQBtQ8w323wis",
-            authDomain: "kanyeseries-d511b.firebaseapp.com",
-            projectId: "kanyeseries-d511b",
-            storageBucket: "kanyeseries-d511b.firebasestorage.app",
-            messagingSenderId: "212048886528",
-            appId: "1:212048886528:web:235f96016a4de83ec991e5",
-            measurementId: "G-7LS8NYFX7Y"
+            apiKey: "AIzaSyBK-HHFid2F9SY1rtGsSO3boUFZihyOpTQ",
+            authDomain: "goldai-58550.firebaseapp.com",
+            projectId: "goldai-58550",databaseURL:"https://goldai-58550-default-rtdb.firebaseio.com",
+            storageBucket: "goldai-58550.firebasestorage.app",
+            messagingSenderId: "726592521265",
+            appId: "1:726592521265:web:8aca7282b6b4aec8c9c110",
+            measurementId: "G-23MEZJVM6Z"
         };
 
         // ========================================
@@ -600,7 +597,7 @@
             }
 
             if (stock <= 5) {
-                return { text: `Low stock · ${stock}`, className: "text-amber-600" };
+                return { text: `Low stock - ${stock}`, className: "text-amber-600" };
             }
 
             return { text: "In stock", className: "text-emerald-600" };
@@ -658,7 +655,7 @@
                 button.classList.toggle("bg-slate-100", !active);
                 button.classList.toggle("text-slate-600", !active);
 
-                button.setAttribute("aria-selected", String(active));
+                button.setAttribute("aria-pressed", String(active));
             });
         }
 
@@ -998,10 +995,10 @@
                         </a>
 
                         <button type="button"
-                                class="wishlist-btn absolute right-2 top-2 flex h-9 w-9 items-center justify-center rounded-full bg-white/95 text-slate-600 shadow-md transition hover:text-red-600"
-                                data-wishlist-id="${safeId}"
-                                aria-label="${inWishlist ? "Remove from wishlist" : "Add to wishlist"}"
-                                aria-pressed="${inWishlist ? "true" : "false"}">
+                            data-wishlist-id="${safeId}"
+                            aria-label="${inWishlist ? "Remove from wishlist" : "Add to wishlist"}"
+                            aria-pressed="${inWishlist ? "true" : "false"}"
+                            class="wishlist-btn absolute right-2 top-2 flex h-9 w-9 items-center justify-center rounded-full bg-white/95 text-slate-600 shadow-md transition hover:text-red-600">
                             <i class="bi ${inWishlist ? "bi-heart-fill text-red-600" : "bi-heart"}"></i>
                         </button>
 
@@ -1029,10 +1026,10 @@
                         </div>
 
                         <button type="button"
-                                class="cart-btn mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-blue-800 px-3 py-2.5 text-xs font-bold text-white transition hover:bg-blue-900 disabled:cursor-not-allowed disabled:bg-slate-300 sm:text-sm"
-                                data-cart-id="${safeId}"
-                                ${available ? "" : "disabled"}
-                                aria-label="${available ? `Add ${safeName} to cart` : `${safeName} is out of stock`}">
+                            data-cart-id="${safeId}"
+                            ${available ? "" : "disabled"}
+                            aria-label="${available ? `Add ${safeName} to cart` : `${safeName} is out of stock`}"
+                            class="cart-btn mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-blue-800 px-3 py-2.5 text-xs font-bold text-white transition hover:bg-blue-900 disabled:cursor-not-allowed disabled:bg-slate-300 sm:text-sm">
                             <i class="bi ${available ? "bi-cart-plus" : "bi-x-circle"}"></i>
                             ${available ? "ADD TO CART" : "OUT OF STOCK"}
                         </button>
@@ -1077,7 +1074,6 @@
                     price: Number(product.price) || 0,
                     image: getProductImage(product),
                     quantity: nextQuantity,
-                    stockReserved: Math.max(0, Number(existing.stockReserved) || 0) + 1,
                     addedAt: existing.addedAt || Date.now()
                 };
 

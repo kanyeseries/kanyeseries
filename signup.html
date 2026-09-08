@@ -463,9 +463,7 @@
                                        focus:bg-white"
                             >
 
-                            <button
-                                type="button"
-                                id="togglePassword"
+                            <button type="button" id="togglePassword" aria-label="Show password"
                                 class="absolute right-3 top-1/2
                                        -translate-y-1/2
                                        w-9 h-9
@@ -475,9 +473,7 @@
                                        hover:bg-blue-50
                                        focus:outline-none
                                        focus:ring-2
-                                       focus:ring-blue-500"
-                                aria-label="Show password"
-                            >
+                                       focus:ring-blue-500">
                                 <i
                                     id="passwordIcon"
                                     class="fas fa-eye"
@@ -555,9 +551,7 @@
                                        focus:bg-white"
                             >
 
-                            <button
-                                type="button"
-                                id="toggleConfirmPassword"
+                            <button type="button" id="toggleConfirmPassword" aria-label="Show confirm password"
                                 class="absolute right-3 top-1/2
                                        -translate-y-1/2
                                        w-9 h-9
@@ -567,9 +561,7 @@
                                        hover:bg-blue-50
                                        focus:outline-none
                                        focus:ring-2
-                                       focus:ring-blue-500"
-                                aria-label="Show confirm password"
-                            >
+                                       focus:ring-blue-500">
                                 <i
                                     id="confirmPasswordIcon"
                                     class="fas fa-eye"
@@ -709,6 +701,7 @@
     import {
         getAuth,
         createUserWithEmailAndPassword,
+        deleteUser,
         updateProfile
     } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
@@ -726,13 +719,13 @@
 
     const firebaseConfig = {
 
-            apiKey: "AIzaSyBx-4BgpCY5OuKRzifPv2xQBtQ8w323wis",
-            authDomain: "kanyeseries-d511b.firebaseapp.com",
-            projectId: "kanyeseries-d511b",
-            storageBucket: "kanyeseries-d511b.firebasestorage.app",
-            messagingSenderId: "212048886528",
-            appId: "1:212048886528:web:235f96016a4de83ec991e5",
-            measurementId: "G-7LS8NYFX7Y"
+            apiKey: "AIzaSyBK-HHFid2F9SY1rtGsSO3boUFZihyOpTQ",
+            authDomain: "goldai-58550.firebaseapp.com",
+            projectId: "goldai-58550",databaseURL:"https://goldai-58550-default-rtdb.firebaseio.com",
+            storageBucket: "goldai-58550.firebasestorage.app",
+            messagingSenderId: "726592521265",
+            appId: "1:726592521265:web:8aca7282b6b4aec8c9c110",
+            measurementId: "G-23MEZJVM6Z"
 };
 
     
@@ -1248,7 +1241,7 @@
 
             case "auth/network-request-failed":
 
-                return "Network connection failed. Please check your internet connection.";
+                return "Connection problem. We couldn't reach the server. Check your internet connection and try again.";
 
 
             case "auth/operation-not-allowed":
@@ -1263,13 +1256,12 @@
 
             case "PERMISSION_DENIED":
 
-                return "Your account was created, but the customer profile could not be saved because of database permissions.";
+            case "database/permission-denied":
+
+                return "We couldn't save your account profile. Please try again.";
 
 
             default:
-
-                console.error(error);
-
                 return "We could not create your account. Please try again.";
 
         }
@@ -1346,6 +1338,9 @@
                 role:
                     "customer",
 
+                active:
+                    true,
+
                 createdAt:
                     serverTimestamp(),
 
@@ -1381,6 +1376,7 @@
 
 
             setLoading(true);
+            let newlyCreatedUser = null;
 
 
             try {
@@ -1399,6 +1395,7 @@
 
                 const user =
                     userCredential.user;
+                newlyCreatedUser = user;
 
 
                 // --------------------------------
@@ -1449,10 +1446,18 @@
 
             } catch (error) {
 
-                console.error(
-                    "Signup error:",
-                    error
-                );
+                console.error("Signup error:", error?.code || "unknown");
+
+                if (newlyCreatedUser) {
+                    try {
+                        await deleteUser(newlyCreatedUser);
+                    } catch (cleanupError) {
+                        console.warn(
+                            "Signup cleanup failed after profile creation error.",
+                            cleanupError.code || cleanupError.message
+                        );
+                    }
+                }
 
 
                 setLoading(false);
@@ -1505,6 +1510,26 @@
     updatePasswordFeedback();
 
 </script>
+
+<footer class="mt-10 bg-blue-950 text-slate-300">
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <div class="flex items-center gap-2 text-white"><span class="flex h-9 w-9 items-center justify-center rounded-lg bg-white"><img src="./images/logo2.png" alt="" class="h-7 w-7 object-contain"></span><span class="font-black tracking-tight">KANYE SERIES</span></div>
+        <p class="mt-2 text-xs text-blue-200">Shoes, electronics, books and special orders.</p>
+      </div>
+      <nav class="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold" aria-label="Footer navigation">
+        <a href="index.html" class="focus-ring hover:text-white">Home</a>
+        <a href="products.html" class="focus-ring hover:text-white">Products</a>
+        <a href="orders.html" class="focus-ring hover:text-white">Orders</a>
+        <a href="special-orders.html" class="focus-ring hover:text-white">Special Orders</a>
+        <a href="policy.html" class="focus-ring hover:text-white">Policies</a>
+      </nav>
+    </div>
+    <div class="mt-6 border-t border-blue-900 pt-5 text-xs text-blue-300">&copy; <span data-footer-year></span> Kanye Series. All rights reserved.</div>
+  </div>
+</footer>
+<script>document.querySelectorAll("[data-footer-year]").forEach(el => el.textContent = new Date().getFullYear());</script>
 
 </body>
 

@@ -1,160 +1,96 @@
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.6.0/workbox-sw.js');
+const CACHE_PREFIX = 'kanye-series-';
+const CACHE_VERSION = 'v3';
+const STATIC_CACHE = `${CACHE_PREFIX}static-${CACHE_VERSION}`;
+const PAGE_CACHE = `${CACHE_PREFIX}pages-${CACHE_VERSION}`;
+const IMAGE_CACHE = `${CACHE_PREFIX}images-${CACHE_VERSION}`;
 
-const PRECACHE_URLS = [
-  './',
-  './index.html',
-  './products.html',
-  './product.html',
-  './cart.html',
-  './checkout.html',
-  './orders.html',
-  './wishlist.html',
-  './profile.html',
-  './login.html',
-  './signup.html',
-  './forgot-password.html',
-  './special-orders.html',
-  './offline.html',
-  './manifest.json',
-  './screenshots/screen-phone.png',
-  './screenshots/screen-desk.png',
-  './images/logo.png',
-  './images/logo2.png',
-  './images/logo3.png',
-  './admin-index.html',
-  './admin-products.html',
-  './admin-orders.html',
-  './admin-users.html',
-  './admin-special-orders.html',
-  './admin-wishlist.html',
-  './admin-cart.html',
-  './admin-sales.html',
-  './admin-profile.html',
-  './admin-login.html',
-  './admin-add-product.html',
-  './admin-edit-product.html',
-  './admin-order-details.html',
-  './admin-user-details.html',
-  './admin-categories.html'
+const APP_SHELL = [
+  './', './index.html', './products.html', './product.html',
+  './special-orders.html', './policy.html', './login.html', './signup.html',
+  './forgot-password.html', './offline.html',
+  './manifest.json', './js/pwa.js', './images/logo.png',
+  './images/logo2.png', './images/logo3.png'
 ];
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(self.skipWaiting());
-});
+const PRIVATE_PATHS = [
+  '/cart.html', '/checkout.html', '/orders.html', '/profile.html',
+  '/wishlist.html', '/admin-'
+];
 
-self.addEventListener('activate', (event) => {
+const isPrivatePath = pathname => PRIVATE_PATHS.some(path => pathname.endsWith(path) || pathname.includes(path));
+const isFirebaseRequest = url => /firebaseio\.com|firebaseapp\.com|googleapis\.com\/identitytoolkit|securetoken\.googleapis\.com/i.test(url.hostname + url.pathname);
+const isPaymentRequest = url => /pesapal|payment|checkout/i.test(url.hostname + url.pathname);
+
+self.addEventListener('install', event => {
   event.waitUntil(
-    Promise.all([
-      self.clients.claim(),
-      caches.keys().then((cacheNames) => Promise.all(
-        cacheNames
-          .filter((name) => !['kanye-series-pages', 'kanye-series-static', 'kanye-series-cloudinary', 'kanye-series-images', 'kanye-series-runtime'].includes(name))
-          .map((name) => caches.delete(name))
+    caches.open(STATIC_CACHE)
+      .then(cache => cache.addAll(APP_SHELL))
+      .catch(error => console.warn('[PWA] App shell precache incomplete:', error))
+  );
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys()
+      .then(keys => Promise.all(
+        keys.filter(key => key.startsWith(CACHE_PREFIX) && ![STATIC_CACHE, PAGE_CACHE, IMAGE_CACHE].includes(key)).map(key => caches.delete(key))
       ))
-    ])
+      .then(() => self.clients.claim())
   );
 });
 
-if ('workbox' in self) {
-  workbox.setConfig({ debug: false });
-  workbox.core.setCacheNameDetails({ prefix: 'kanye-series-pwa', suffix: 'v1' });
-  workbox.precaching.precacheAndRoute(PRECACHE_URLS.map((url) => ({ url, revision: null })));
+async function networkFirstPage(request) {
+  try {
+    const response = await fetch(request);
+    if (response.ok) await (await caches.open(PAGE_CACHE)).put(request, response.clone());
+    return response;
+  } catch (error) {
+    const fallbackUrl = new URL(request.url);
+    fallbackUrl.search = '';
+    return caches.match(request).then(cached => cached || caches.match(fallbackUrl.href) || caches.match('./offline.html'));
+  }
+}
 
-  workbox.routing.registerRoute(
-    ({ request, url }) => request.mode === 'navigate' && url.origin === self.location.origin,
-    new workbox.strategies.NetworkFirst({
-      cacheName: 'kanye-series-pages',
-      plugins: [
-        new workbox.expiration.ExpirationPlugin({
-          maxEntries: 80,
-          maxAgeSeconds: 7 * 24 * 60 * 60,
-          purgeOnQuotaError: true
-        }),
-        new workbox.cacheableResponse.CacheableResponsePlugin({
-          statuses: [0, 200]
-        })
-      ],
-      fetchOptions: { credentials: 'same-origin' },
-      matchOptions: { ignoreSearch: true }
-    })
-  );
-
-  workbox.routing.registerRoute(
-    ({ request, url }) => {
-      if (request.method !== 'GET') return false;
-      return /\.(?:css|js|woff2?|ttf|eot|svg|png|jpg|jpeg|gif|webp|ico|avif)$/i.test(url.pathname);
-    },
-    new workbox.strategies.StaleWhileRevalidate({
-      cacheName: 'kanye-series-static',
-      plugins: [
-        new workbox.expiration.ExpirationPlugin({
-          maxEntries: 250,
-          maxAgeSeconds: 30 * 24 * 60 * 60,
-          purgeOnQuotaError: true
-        })
-      ]
-    })
-  );
-
-  workbox.routing.registerRoute(
-    ({ url }) => url.origin === 'https://res.cloudinary.com' || /cloudinary\.com/.test(url.hostname),
-    new workbox.strategies.CacheFirst({
-      cacheName: 'kanye-series-cloudinary',
-      plugins: [
-        new workbox.expiration.ExpirationPlugin({
-          maxEntries: 150,
-          maxAgeSeconds: 45 * 24 * 60 * 60,
-          purgeOnQuotaError: true
-        }),
-        new workbox.cacheableResponse.CacheableResponsePlugin({
-          statuses: [0, 200]
-        })
-      ]
-    })
-  );
-
-  workbox.routing.registerRoute(
-    ({ url }) => /fonts\.(googleapis|gstatic)\.com|cdn\.jsdelivr\.net|unpkg\.com/.test(url.hostname),
-    new workbox.strategies.StaleWhileRevalidate({
-      cacheName: 'kanye-series-runtime',
-      plugins: [
-        new workbox.expiration.ExpirationPlugin({
-          maxEntries: 80,
-          maxAgeSeconds: 7 * 24 * 60 * 60,
-          purgeOnQuotaError: true
-        })
-      ]
-    })
-  );
-
-  workbox.routing.setCatchHandler(({ event }) => {
-    if (event.request.mode === 'navigate') {
-      return caches.match('./offline.html');
+async function cacheFirstImage(request) {
+  const cached = await caches.match(request);
+  if (cached) return cached;
+  try {
+    const response = await fetch(request);
+    if (response.ok) {
+      const cache = await caches.open(IMAGE_CACHE);
+      const keys = await cache.keys();
+      if (keys.length >= 150) await cache.delete(keys[0]);
+      await cache.put(request, response.clone());
     }
+    return response;
+  } catch (error) {
     return Response.error();
-  });
+  }
 }
 
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
+self.addEventListener('fetch', event => {
+  const request = event.request;
+  const url = new URL(request.url);
+  if (request.method !== 'GET') return;
+  if (isFirebaseRequest(url) || isPaymentRequest(url)) return;
+  if (request.destination === 'image' || /\.(?:png|jpe?g|gif|webp|avif|ico)$/i.test(url.pathname)) {
+    event.respondWith(cacheFirstImage(request));
+    return;
   }
-
-  if (event.data && event.data.type === 'SYNC_SAFE_REQUEST') {
-    event.waitUntil(
-      fetch(event.data.url, { method: event.data.method || 'GET', headers: event.data.headers || {} })
-        .then((response) => response.ok)
-        .catch(() => false)
-    );
+  if (url.origin !== self.location.origin) return;
+  if (request.mode === 'navigate') {
+    if (isPrivatePath(url.pathname)) return;
+    event.respondWith(networkFirstPage(request));
+    return;
+  }
+  if (/\.(?:css|js|woff2?|ttf|eot|svg)$/i.test(url.pathname)) {
+    event.respondWith(caches.match(request).then(cached => cached || fetch(request).then(response => {
+      if (!response.ok) return response;
+      return caches.open(STATIC_CACHE).then(cache => { cache.put(request, response.clone()); return response; });
+    })));
   }
 });
 
-if ('periodicSync' in self.registration) {
-  self.addEventListener('periodicsync', (event) => {
-    if (event.tag === 'refresh-public-content') {
-      event.waitUntil(
-        fetch('./products.html', { cache: 'no-store' }).catch(() => undefined)
-      );
-    }
-  });
-}
+self.addEventListener('message', event => {
+  if (event.data?.type === 'SKIP_WAITING') self.skipWaiting();
+});

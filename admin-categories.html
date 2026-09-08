@@ -32,13 +32,11 @@ body{background:#f8fafc;color:#0f172a}
 <a href="admin-orders.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-bag-check"></i><span>Orders</span></a>
 <a href="admin-users.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-people"></i><span>Users</span></a>
 <a href="admin-special-orders.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-clipboard-check"></i><span>Special Orders</span></a>
-<a href="admin-wishlist.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-heart"></i><span>Wishlist</span></a>
-<a href="admin-cart.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-cart3"></i><span>Cart</span></a>
 <a href="admin-sales.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-graph-up-arrow"></i><span>Sales</span></a>
   </nav>
   <div class="border-t border-blue-900 p-4">
     <a href="admin-profile.html" class="nav-link flex items-center gap-3 rounded-xl px-4 py-3 font-semibold"><i class="bi bi-person-circle"></i><span>Admin Profile</span></a>
-    <button data-signout class="nav-link mt-1 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left font-semibold focus-ring"><i class="bi bi-box-arrow-right"></i><span>Sign Out</span></button>
+    <button type="button" data-signout class="nav-link mt-1 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left font-semibold focus-ring"><i class="bi bi-box-arrow-right"></i><span>Sign Out</span></button>
   </div>
 </aside>
 
@@ -46,7 +44,7 @@ body{background:#f8fafc;color:#0f172a}
 <aside id="drawer" class="drawer fixed inset-y-0 left-0 z-50 w-72 bg-blue-950 text-white lg:hidden">
   <div class="flex h-20 items-center justify-between border-b border-blue-900 px-5">
     <div class="flex items-center gap-2 font-black"><img src="./images/logo2.png" alt="Kanye Series" class="h-8 w-8 object-contain">KANYE SERIES</div>
-    <button id="closeMenu" aria-label="Close menu" class="focus-ring rounded-lg p-2"><i class="bi bi-x-lg"></i></button>
+    <button type="button" id="closeMenu" aria-label="Close menu" class="focus-ring rounded-lg p-2"><i class="bi bi-x-lg"></i></button>
   </div>
   <nav class="space-y-1 p-4" aria-label="Mobile admin navigation">
 <a href="admin-index.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a>
@@ -54,8 +52,6 @@ body{background:#f8fafc;color:#0f172a}
 <a href="admin-orders.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-bag-check"></i><span>Orders</span></a>
 <a href="admin-users.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-people"></i><span>Users</span></a>
 <a href="admin-special-orders.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-clipboard-check"></i><span>Special Orders</span></a>
-<a href="admin-wishlist.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-heart"></i><span>Wishlist</span></a>
-<a href="admin-cart.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-cart3"></i><span>Cart</span></a>
 <a href="admin-sales.html" class="nav-link  flex items-center gap-3 rounded-xl px-4 py-3 font-semibold focus-ring"><i class="bi bi-graph-up-arrow"></i><span>Sales</span></a>
   </nav>
 </aside>
@@ -63,7 +59,7 @@ body{background:#f8fafc;color:#0f172a}
 <header class="sticky top-0 z-30 border-b bg-white/95 backdrop-blur lg:ml-72">
   <div class="flex h-20 items-center justify-between px-4 sm:px-6">
     <div class="flex items-center gap-3">
-      <button id="openMenu" class="rounded-xl border px-3 py-2 lg:hidden focus-ring" aria-label="Open navigation"><i class="bi bi-list text-xl"></i></button>
+      <button type="button" id="openMenu" aria-label="Open navigation" class="rounded-xl border px-3 py-2 lg:hidden focus-ring"><i class="bi bi-list text-xl"></i></button>
       <div>
         <p class="text-xs font-bold uppercase tracking-widest text-blue-700">Kanye Series</p>
         <h1 class="text-xl font-black sm:text-2xl">Categories</h1>
@@ -72,26 +68,26 @@ body{background:#f8fafc;color:#0f172a}
     <div class="flex items-center gap-3">
       <div class="hidden text-right sm:block"><div data-admin-name class="font-bold">Admin</div><div class="text-xs text-slate-500">Administrator</div></div>
       <a href="admin-profile.html" class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-blue-50 text-blue-800 focus-ring" aria-label="Admin profile"><img data-admin-avatar class="hidden h-full w-full object-cover" alt="Administrator avatar"><i data-avatar-icon class="bi bi-person-fill"></i></a>
-      <button data-signout class="flex h-10 w-10 items-center justify-center rounded-xl border bg-white focus-ring" aria-label="Sign out"><i class="bi bi-box-arrow-right"></i></button>
+      <button type="button" data-signout aria-label="Sign out" class="flex h-10 w-10 items-center justify-center rounded-xl border bg-white focus-ring"><i class="bi bi-box-arrow-right"></i></button>
     </div>
   </div>
 </header>
 
 <main id="protectedApp" class="hidden lg:ml-72">
   <div class="mx-auto max-w-[1600px] p-4 pb-28 sm:p-6 sm:pb-28">
-<div class="mb-5 flex items-end justify-between"><div><h2 class="text-2xl font-black">Categories</h2><p class="text-sm text-slate-500">Manage the categories used by products.</p></div><button id="addCategory" class="rounded-xl bg-blue-800 px-4 py-3 font-bold text-white">+ Add Category</button></div><div id="categoryList" class="card divide-y overflow-hidden rounded-2xl border bg-white"><div class="p-6 text-slate-500">Loading...</div></div>
+<div class="mb-5 flex items-end justify-between"><div><h2 class="text-2xl font-black">Categories</h2><p class="text-sm text-slate-500">Manage the categories used by products.</p></div><button type="button" id="addCategory" class="rounded-xl bg-blue-800 px-4 py-3 font-bold text-white">+ Add Category</button></div><div id="categoryList" class="card divide-y overflow-hidden rounded-2xl border bg-white"><div class="p-6 text-slate-500">Loading...</div></div>
   </div>
 </main>
 
 <script type="module">
 const firebaseConfig = {
-  apiKey: "AIzaSyBx-4BgpCY5OuKRzifPv2xQBtQ8w323wis",
-  authDomain: "kanyeseries-d511b.firebaseapp.com",
-  projectId: "kanyeseries-d511b",
-  storageBucket: "kanyeseries-d511b.firebasestorage.app",
-  messagingSenderId: "212048886528",
-  appId: "1:212048886528:web:235f96016a4de83ec991e5",
-  measurementId: "G-7LS8NYFX7Y"
+  apiKey: "AIzaSyBK-HHFid2F9SY1rtGsSO3boUFZihyOpTQ",
+  authDomain: "goldai-58550.firebaseapp.com",
+  projectId: "goldai-58550",databaseURL:"https://goldai-58550-default-rtdb.firebaseio.com",
+  storageBucket: "goldai-58550.firebasestorage.app",
+  messagingSenderId: "726592521265",
+  appId: "1:726592521265:web:8aca7282b6b4aec8c9c110",
+  measurementId: "G-23MEZJVM6Z"
 };
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
@@ -152,7 +148,7 @@ document.getElementById("openMenu")?.addEventListener("click", () => {drawer.cla
 document.getElementById("closeMenu")?.addEventListener("click", () => {drawer.classList.remove("open"); shade.classList.add("hidden");});
 shade?.addEventListener("click", () => {drawer.classList.remove("open"); shade.classList.add("hidden");});
 
-async function render(){const s=await get(ref(db,"categories"));const a=values(s);categoryList.innerHTML=a.map(c=>`<div class="flex items-center justify-between p-4"><div><b>${c.name||"Unnamed"}</b><p class="text-xs text-slate-500">${c.active===false?"Inactive":"Active"}</p></div><button data-delete="${c._key}" class="text-sm font-bold text-red-700">Delete</button></div>`).join("")||'<p class="p-6 text-slate-500">No categories found.</p>';document.querySelectorAll("[data-delete]").forEach(b=>b.onclick=async()=>{const r=await Swal.fire({title:"Delete category?",icon:"warning",showCancelButton:true,confirmButtonColor:"#dc2626"});if(r.isConfirmed){await remove(ref(db,"categories/"+b.dataset.delete));render();}})}
+async function render(){const s=await get(ref(db,"categories"));const a=values(s);categoryList.innerHTML=a.map(c=>`<div class="flex items-center justify-between p-4"><div><b>${c.name||"Unnamed"}</b><p class="text-xs text-slate-500">${c.active===false?"Inactive":"Active"}</p></div><button type="button" data-delete="${c._key}" class="text-sm font-bold text-red-700">Delete</button></div>`).join("")||'<p class="p-6 text-slate-500">No categories found.</p>';document.querySelectorAll("[data-delete]").forEach(b=>b.onclick=async()=>{const r=await Swal.fire({title:"Delete category?",icon:"warning",showCancelButton:true,confirmButtonColor:"#dc2626"});if(r.isConfirmed){await remove(ref(db,"categories/"+b.dataset.delete));render();}})}
 addCategory.onclick=async()=>{const result=await Swal.fire({title:"New category",input:"text",inputLabel:"Category name",showCancelButton:true,confirmButtonColor:"#1d4ed8"});if(result.isConfirmed&&result.value.trim()){const p=push(ref(db,"categories"));await set(p,{name:result.value.trim(),active:true,createdAt:Date.now()});render();}}
 async function initPage(){render();}
 </script>
